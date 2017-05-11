@@ -38,7 +38,7 @@ namespace System_Tester
         {
             public static void test()
             {
-                MainView.GetRWE().ShowMessage("test");
+                MainView.GetRWE().ShowMessage("Adele Edited");
             }
         }
     }
