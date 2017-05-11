@@ -53,5 +53,10 @@ namespace System_Tester
         {
             Controller.GetTestMessage();
         }
+
+        private void GeneralAnalysisTab_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

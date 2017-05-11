@@ -100,6 +100,7 @@
             this.GeneralAnalysisTab.TabIndex = 0;
             this.GeneralAnalysisTab.Text = "Общий анализ";
             this.GeneralAnalysisTab.UseVisualStyleBackColor = true;
+            this.GeneralAnalysisTab.Click += new System.EventHandler(this.GeneralAnalysisTab_Click);
             // 
             // CPUAnalysisTab
             // 
