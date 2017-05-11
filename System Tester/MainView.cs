@@ -10,11 +10,29 @@ using System.Windows.Forms;
 
 namespace System_Tester
 {
-    public partial class Form1 : Form
+    public partial class MainView : Form
     {
-        public Form1()
+        public MainView()
         {
             InitializeComponent();
+        }
+
+        private void MainTabs_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+
+
+
+
+
+
+
+
         }
     }
 }

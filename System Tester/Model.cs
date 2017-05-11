@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace System_Tester
 {
-    static class Program
+    static class Model
     {
         /// <summary>
         /// Главная точка входа для приложения.
@@ -16,7 +16,7 @@ namespace System_Tester
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainView());
         }
     }
 }
