@@ -71,6 +71,7 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Запустить тест";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabControl1
             // 
@@ -106,7 +107,7 @@
             this.CPUAnalysisTab.Location = new System.Drawing.Point(4, 22);
             this.CPUAnalysisTab.Name = "CPUAnalysisTab";
             this.CPUAnalysisTab.Padding = new System.Windows.Forms.Padding(3);
-            this.CPUAnalysisTab.Size = new System.Drawing.Size(470, 15);
+            this.CPUAnalysisTab.Size = new System.Drawing.Size(368, 297);
             this.CPUAnalysisTab.TabIndex = 1;
             this.CPUAnalysisTab.Text = "Анализ ЦП";
             this.CPUAnalysisTab.UseVisualStyleBackColor = true;
@@ -115,7 +116,7 @@
             // 
             this.RAMAnalysisTab.Location = new System.Drawing.Point(4, 22);
             this.RAMAnalysisTab.Name = "RAMAnalysisTab";
-            this.RAMAnalysisTab.Size = new System.Drawing.Size(470, 15);
+            this.RAMAnalysisTab.Size = new System.Drawing.Size(368, 297);
             this.RAMAnalysisTab.TabIndex = 2;
             this.RAMAnalysisTab.Text = "Анализ ОЗУ";
             this.RAMAnalysisTab.UseVisualStyleBackColor = true;
@@ -124,7 +125,7 @@
             // 
             this.DSAnalysisTab.Location = new System.Drawing.Point(4, 22);
             this.DSAnalysisTab.Name = "DSAnalysisTab";
-            this.DSAnalysisTab.Size = new System.Drawing.Size(470, 15);
+            this.DSAnalysisTab.Size = new System.Drawing.Size(368, 297);
             this.DSAnalysisTab.TabIndex = 4;
             this.DSAnalysisTab.Text = "Анализ ЗУ";
             this.DSAnalysisTab.UseVisualStyleBackColor = true;
@@ -133,7 +134,7 @@
             // 
             this.TCNAnalysisTab.Location = new System.Drawing.Point(4, 22);
             this.TCNAnalysisTab.Name = "TCNAnalysisTab";
-            this.TCNAnalysisTab.Size = new System.Drawing.Size(470, 15);
+            this.TCNAnalysisTab.Size = new System.Drawing.Size(368, 297);
             this.TCNAnalysisTab.TabIndex = 3;
             this.TCNAnalysisTab.Text = "Анализ ТВС";
             this.TCNAnalysisTab.UseVisualStyleBackColor = true;
@@ -147,6 +148,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainView";
             this.Text = "System Tester";
+            this.Load += new System.EventHandler(this.MainView_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);

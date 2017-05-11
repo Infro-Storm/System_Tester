@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace System_Tester
 {
+    
     class Controller
     {
-
+        public static void GetTestMessage()
+        {
+            WMICollector.test();
+        }
         class CPUTester
         {
             
@@ -31,9 +36,12 @@ namespace System_Tester
 
         class WMICollector
         {
-
+            public static void test()
+            {
+                MainView.GetRWE().ShowMessage("test");
+            }
         }
     }
 }
 
-}
+
