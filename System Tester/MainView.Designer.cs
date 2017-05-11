@@ -93,7 +93,6 @@
             // 
             // GeneralAnalysisTab
             // 
-            this.GeneralAnalysisTab.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.GeneralAnalysisTab.Location = new System.Drawing.Point(4, 22);
             this.GeneralAnalysisTab.Name = "GeneralAnalysisTab";
             this.GeneralAnalysisTab.Padding = new System.Windows.Forms.Padding(3);
