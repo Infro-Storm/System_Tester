@@ -12,7 +12,7 @@ namespace System_Tester
     {
         public static void GetTestMessage()
         {
-            WMICollector.test();
+ 
         }
         class CPUTester
         {
@@ -36,10 +36,7 @@ namespace System_Tester
 
         class WMICollector
         {
-            public static void test()
-            {
 
-            }
         }
     }
 }
