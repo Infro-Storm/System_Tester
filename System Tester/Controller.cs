@@ -10,33 +10,14 @@ namespace System_Tester
     
     class Controller
     {
-        public static void GetTestMessage()
-        {
- 
-        }
-        class CPUTester
-        {
-            
-        }
-
-        class RAMTester
+        public static void initLogger()
         {
 
         }
-
-        class DSTester
+        public static void initDebugMode(bool  debug_state)
         {
-
-        }
-
-        class TCNTester
-        {
-
-        }
-
-        class WMICollector
-        {
-
+            if (debug_state) Model.logger_window_init();
+            else Model.logger_window_destroy();
         }
     }
 }

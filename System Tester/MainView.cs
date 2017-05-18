@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -46,17 +47,25 @@ namespace System_Tester
 
         private void MainView_Load(object sender, EventArgs e)
         {
-
+         //   if (Model.debug_mode) Controller.initDebugMode();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Controller.GetTestMessage();
+            Label newlbl = new Label();
+            newlbl.Text = "test";
+            GeneralAnalysisTbl.Controls.Add(newlbl, 0, 1 );
         }
 
         private void GeneralAnalysisTab_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+        private void MainView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.D && e.Alt) Controller.initDebugMode(true);
         }
     }
 }

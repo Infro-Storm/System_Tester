@@ -33,12 +33,17 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.GeneralAnalysisTab = new System.Windows.Forms.TabPage();
+            this.GeneralAnalysisTbl = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.CPUAnalysisTab = new System.Windows.Forms.TabPage();
             this.RAMAnalysisTab = new System.Windows.Forms.TabPage();
             this.DSAnalysisTab = new System.Windows.Forms.TabPage();
             this.TCNAnalysisTab = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.GeneralAnalysisTab.SuspendLayout();
+            this.GeneralAnalysisTbl.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -93,6 +98,7 @@
             // 
             // GeneralAnalysisTab
             // 
+            this.GeneralAnalysisTab.Controls.Add(this.GeneralAnalysisTbl);
             this.GeneralAnalysisTab.Location = new System.Drawing.Point(4, 22);
             this.GeneralAnalysisTab.Name = "GeneralAnalysisTab";
             this.GeneralAnalysisTab.Padding = new System.Windows.Forms.Padding(3);
@@ -101,6 +107,49 @@
             this.GeneralAnalysisTab.Text = "Общий анализ";
             this.GeneralAnalysisTab.UseVisualStyleBackColor = true;
             this.GeneralAnalysisTab.Click += new System.EventHandler(this.GeneralAnalysisTab_Click);
+            // 
+            // GeneralAnalysisTbl
+            // 
+            this.GeneralAnalysisTbl.ColumnCount = 2;
+            this.GeneralAnalysisTbl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.GeneralAnalysisTbl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.GeneralAnalysisTbl.Controls.Add(this.label1, 0, 0);
+            this.GeneralAnalysisTbl.Controls.Add(this.label2, 0, 1);
+            this.GeneralAnalysisTbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GeneralAnalysisTbl.Location = new System.Drawing.Point(3, 3);
+            this.GeneralAnalysisTbl.Name = "GeneralAnalysisTbl";
+            this.GeneralAnalysisTbl.RowCount = 9;
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.Size = new System.Drawing.Size(362, 291);
+            this.GeneralAnalysisTbl.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(123, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Название процессора:";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(30, 23);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(96, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Количество ядер:";
             // 
             // CPUAnalysisTab
             // 
@@ -146,11 +195,16 @@
             this.ClientSize = new System.Drawing.Size(382, 379);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "MainView";
             this.Text = "System Tester";
             this.Load += new System.EventHandler(this.MainView_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainView_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
+            this.GeneralAnalysisTab.ResumeLayout(false);
+            this.GeneralAnalysisTbl.ResumeLayout(false);
+            this.GeneralAnalysisTbl.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,6 +219,9 @@
         private System.Windows.Forms.TabPage RAMAnalysisTab;
         private System.Windows.Forms.TabPage DSAnalysisTab;
         private System.Windows.Forms.TabPage TCNAnalysisTab;
+        private System.Windows.Forms.TableLayoutPanel GeneralAnalysisTbl;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 
