@@ -47,7 +47,8 @@ namespace System_Tester
 
         private void MainView_Load(object sender, EventArgs e)
         {
-         //   if (Model.debug_mode) Controller.initDebugMode();
+            //   if (Model.debug_mode) Controller.initDebugMode();
+ 
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -55,6 +56,12 @@ namespace System_Tester
             Label newlbl = new Label();
             newlbl.Text = "test";
             GeneralAnalysisTbl.Controls.Add(newlbl, 0, 1 );
+            Logger.AddText("debug", Message_level.debug, Message_type.debug);
+            Logger.AddText("error", Message_level.debug, Message_type.error);
+            Logger.AddText("info", Message_level.debug, Message_type.info);
+            Logger.AddText("test", Message_level.debug, Message_type.test);
+            Logger.AddText("warning", Message_level.debug, Message_type.warning);
+
         }
 
         private void GeneralAnalysisTab_Click(object sender, EventArgs e)

@@ -21,6 +21,13 @@ namespace System_Tester
                 return debug_mode;
             }
         }
+        public static LogView LoggerWindow
+        {
+            get
+            {
+                return loggerWindow;
+            }
+        }
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -37,6 +44,7 @@ namespace System_Tester
             loggerWindow = new LogView();
             loggerWindow.Show();
             debug_mode = true;
+            Logger.AddText("Вход в режим отладки", Message_level.normal, Message_type.info);
         }
 
         public static void Debug_state_destroy()
@@ -44,6 +52,7 @@ namespace System_Tester
             loggerWindow.Close();
             loggerWindow = null;
             debug_mode = false;
+            Logger.AddText("Выход из режима отладки", Message_level.normal, Message_type.info);
         }
 
         static string[] GetCompuerData() {

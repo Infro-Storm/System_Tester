@@ -60,8 +60,12 @@
             this.Controls.Add(this.LogView_rtb);
             this.Controls.Add(this.CleanLog_btn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "LogView";
             this.Text = "Просмотр журнала";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LogView_FormClosing);
+            this.Load += new System.EventHandler(this.LogView_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LogView_KeyDown);
             this.ResumeLayout(false);
 
         }
