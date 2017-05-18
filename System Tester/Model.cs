@@ -14,7 +14,13 @@ namespace System_Tester
         //Глобальные переменные
         static bool debug_mode = false;
         static LogView loggerWindow;
-
+        //Геттеры и сеттеры
+        public static bool Debug_mode {
+            get
+            {
+                return debug_mode;
+            }
+        }
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -26,16 +32,18 @@ namespace System_Tester
             Application.Run(new MainView());
         }
 
-        public static void logger_window_init()
+        public static void Debug_state_init()
         {
             loggerWindow = new LogView();
             loggerWindow.Show();
+            debug_mode = true;
         }
 
-        public static void logger_window_destroy()
+        public static void Debug_state_destroy()
         {
             loggerWindow.Close();
             loggerWindow = null;
+            debug_mode = false;
         }
 
         static string[] GetCompuerData() {

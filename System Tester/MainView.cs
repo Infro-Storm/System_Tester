@@ -65,7 +65,7 @@ namespace System_Tester
 
         private void MainView_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.D && e.Alt) Controller.initDebugMode(true);
+            if (e.KeyCode == Keys.D && e.Alt) Controller.ChangeDebugMode();
         }
     }
 }

@@ -10,14 +10,14 @@ namespace System_Tester
     
     class Controller
     {
-        public static void initLogger()
+        public static void InitLogger()
         {
 
         }
-        public static void initDebugMode(bool  debug_state)
+        public static void ChangeDebugMode()
         {
-            if (debug_state) Model.logger_window_init();
-            else Model.logger_window_destroy();
+            if (!Model.Debug_mode)Model.Debug_state_init();
+            else Model.Debug_state_destroy();
         }
     }
 }
