@@ -19,6 +19,10 @@ namespace System_Tester
             if (!Model.Debug_mode)Model.Debug_state_init();
             else Model.Debug_state_destroy();
         }
+        public static void GetSystemInfo()
+        {
+            Model.GetCompuerData();
+        }
     }
 }
 

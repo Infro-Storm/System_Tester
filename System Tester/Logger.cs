@@ -7,20 +7,7 @@ using System.Threading.Tasks;
 namespace System_Tester
 {
 
-    public enum Message_type : byte
-    {
-        error,
-        info,
-        test,
-        debug,
-        warning
-    }
-    public enum Message_level : byte
-    {
-        normal,
-        debug,
-        full_log,
-    }
+
 
     static class Logger
 
@@ -35,7 +22,10 @@ namespace System_Tester
             log_text.Add(new Log_message(new_messag, level, type));
             OnRefresh?.Invoke(log_text);
         }
-
+        public static void AddText(string new_messag)
+        {
+            AddText(new_messag, Message_level.normal, Message_type.test);
+        }
     }
     public class Log_message
     {

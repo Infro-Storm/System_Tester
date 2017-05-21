@@ -48,6 +48,7 @@
             this.LogView_rtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LogView_rtb.Location = new System.Drawing.Point(0, 0);
             this.LogView_rtb.Name = "LogView_rtb";
+            this.LogView_rtb.ReadOnly = true;
             this.LogView_rtb.Size = new System.Drawing.Size(585, 450);
             this.LogView_rtb.TabIndex = 1;
             this.LogView_rtb.Text = "";

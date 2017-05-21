@@ -9,13 +9,38 @@ using System.Management;
 
 namespace System_Tester
 {
+    //enum перечисления:
+    public enum Message_type : byte
+    {
+        error,
+        info,
+        test,
+        debug,
+        warning
+    }
+    public enum Message_level : byte
+    {
+        normal,
+        debug,
+        full_log,
+    }
+    public enum TabOfProgramm : byte
+    {
+        general,
+        cpu,
+        ram,
+        storage,
+        network
+    }
     static class Model
     {
         //Глобальные переменные
         static bool debug_mode = false;
         static LogView loggerWindow;
+        static MainView mainView;
         //Геттеры и сеттеры
-        public static bool Debug_mode {
+        public static bool Debug_mode
+        {
             get
             {
                 return debug_mode;
@@ -28,15 +53,19 @@ namespace System_Tester
                 return loggerWindow;
             }
         }
+
+        //
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
         static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainView());
+            mainView = new MainView();
+            Application.Run(mainView);
         }
 
         public static void Debug_state_init()
@@ -55,48 +84,138 @@ namespace System_Tester
             Logger.AddText("Выход из режима отладки", Message_level.normal, Message_type.info);
         }
 
-        static string[] GetCompuerData() {
-            // Get the WMI class
-            ManagementClass processClass =
-                new ManagementClass();
-            processClass.Path = new
-                ManagementPath("Win32_Process");
-
-            // Get the methods in the class
-            MethodDataCollection methods =
-                processClass.Methods;
-
-            // display the methods
-            Console.WriteLine("Method Names: ");
-            foreach (MethodData method in methods)
+        public static void GetCompuerData()
+        {
+            foreach (CPUData cpu in GetCPUData())
             {
-                Console.WriteLine(method.Name);
+                mainView.SetInfo(cpu.GetShortInfo(), TabOfProgramm.general);
+                mainView.SetInfo(cpu.GetInfo(), TabOfProgramm.cpu);
             }
-            Console.WriteLine();
+        }
+        private static List<CPUData> GetCPUData()
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "Select * From Win32_Processor");
+            List<CPUData> CPUs = new List<CPUData>();
+            foreach (ManagementObject instance in searcher.Get()) CPUs.Add(new CPUData(instance));
+            return CPUs;
+        }
+    }
 
-            // Get the properties in the class
-            PropertyDataCollection properties =
-                processClass.Properties;
+    class Device {
+        protected string deviceName;
+        public Device(ManagementObject instance) {
+            if (instance["DeviceID"] != null)  deviceName = instance["DeviceID"].ToString();
+        }
+        public virtual List<DeviceForView> GetInfo()
+        {
+            List<DeviceForView> result = new List<DeviceForView>();
+            result.Add(new DeviceForView("Идентификатор устройства", deviceName, "") );
+            return result;
+        }
+    }
 
-            // display the properties
-            Console.WriteLine("Property Names: ");
-            foreach (PropertyData property in properties)
+    public class DeviceForView {
+        string name;
+        string value;
+        string units;
+        public DeviceForView(string name, string value, string units)
+        {
+            this.name = name;
+            this.value = value;
+            this.units = units;
+        }
+        public string Name
+        {
+            get
             {
-                Console.WriteLine(property.Name);
+                return name;
             }
-            Console.WriteLine();
-
-            // Get the Qualifiers in the class
-            QualifierDataCollection qualifiers =
-                processClass.Qualifiers;
-
-            // display the qualifiers
-            Console.WriteLine("Qualifier Names: ");
-            foreach (QualifierData qualifier in qualifiers)
+        }
+        public string Value
+        {
+            get
             {
-                Console.WriteLine(qualifier.Name);
+                return value;
             }
-            return null;
+        }
+        public string Unit
+        {
+            get
+            {
+                return units;
+            }
+        }
+    }
+
+    class CPUData : Device
+    {
+        string modelNameCPU;
+        string processorID;
+        Int32 maxClockCPU;
+        Int32 cacheSizeL2;
+        Int32 cacheSizeL3;
+        Int32 coreCount;
+        Int32 logicalCoreCount;
+        
+        public CPUData(ManagementObject instance) : base (instance)
+        {
+            foreach (PropertyData nameprp in instance.Properties)
+            {
+                string propertyName = nameprp.Name;
+                if (instance[propertyName] != null)
+                {
+                    switch (propertyName)
+                    {
+                        case "Name":
+                            modelNameCPU = instance[propertyName].ToString();
+                            break;
+                        case "MaxClockSpeed":
+                            maxClockCPU = Convert.ToInt32(instance[propertyName].ToString());
+                            break;
+                        case "DeviceID":
+                            break;
+                        case "L2CacheSize":
+                            cacheSizeL2 = Convert.ToInt32(instance[propertyName].ToString());
+                            break;
+                        case "L3CacheSize":
+                            cacheSizeL3 = Convert.ToInt32(instance[propertyName].ToString());
+                            break;
+                        case "NumberOfCores":
+                            coreCount = Convert.ToInt32(instance[propertyName].ToString());
+                            break;
+                        case "NumberOfLogicalProcessors":
+                            logicalCoreCount = Convert.ToInt32(instance[propertyName].ToString());
+                            break;
+                        case "ProcessorId":
+                            processorID = instance[propertyName].ToString();
+                            break;
+                        default:
+                            Logger.AddText(nameprp.Name + " " + instance[nameprp.Name].ToString(), Message_level.debug, Message_type.info);
+                            break;
+                    }
+
+                }
+            }
+        }
+
+        public override List<DeviceForView> GetInfo()
+        {
+            List<DeviceForView> result = base.GetInfo();
+            result.Add(new DeviceForView("Название процессора", modelNameCPU, ""));
+            result.Add(new DeviceForView("ID процессора", processorID, ""));
+            result.Add(new DeviceForView("Максимальная частота", maxClockCPU.ToString(), "МГц"));
+            result.Add(new DeviceForView("Размер L2 кэша", cacheSizeL2.ToString(), "Кб"));
+            result.Add(new DeviceForView("Размер L3 кэша", cacheSizeL3.ToString(), "Кб"));
+            result.Add(new DeviceForView("Количество физ. ядер", coreCount.ToString(), ""));
+            result.Add(new DeviceForView("Количество лог. ядер", logicalCoreCount.ToString(), ""));
+            return result;
+        }
+        public List<DeviceForView> GetShortInfo()
+        {
+            List<DeviceForView> result = base.GetInfo();
+            result.Add(new DeviceForView("Название процессора", modelNameCPU, ""));
+            result.Add(new DeviceForView("Максимальная частота", maxClockCPU.ToString(), "МГц"));
+            return result;
         }
     }
 }

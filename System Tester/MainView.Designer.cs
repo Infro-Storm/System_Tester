@@ -34,16 +34,21 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.GeneralAnalysisTab = new System.Windows.Forms.TabPage();
             this.GeneralAnalysisTbl = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.CPUAnalysisTab = new System.Windows.Forms.TabPage();
             this.RAMAnalysisTab = new System.Windows.Forms.TabPage();
             this.DSAnalysisTab = new System.Windows.Forms.TabPage();
             this.TCNAnalysisTab = new System.Windows.Forms.TabPage();
+            this.cpuPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.RAMTab = new System.Windows.Forms.TableLayoutPanel();
+            this.StorageTab = new System.Windows.Forms.TableLayoutPanel();
+            this.NetworkTab = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.GeneralAnalysisTab.SuspendLayout();
-            this.GeneralAnalysisTbl.SuspendLayout();
+            this.CPUAnalysisTab.SuspendLayout();
+            this.RAMAnalysisTab.SuspendLayout();
+            this.DSAnalysisTab.SuspendLayout();
+            this.TCNAnalysisTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -63,7 +68,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(382, 379);
             this.tableLayoutPanel1.TabIndex = 2;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
+            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.TableLayoutPanel1_Paint);
             // 
             // button1
             // 
@@ -76,7 +81,7 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Запустить тест";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // tabControl1
             // 
@@ -112,9 +117,7 @@
             // 
             this.GeneralAnalysisTbl.ColumnCount = 2;
             this.GeneralAnalysisTbl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.GeneralAnalysisTbl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.GeneralAnalysisTbl.Controls.Add(this.label1, 0, 0);
-            this.GeneralAnalysisTbl.Controls.Add(this.label2, 0, 1);
+            this.GeneralAnalysisTbl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.GeneralAnalysisTbl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GeneralAnalysisTbl.Location = new System.Drawing.Point(3, 3);
             this.GeneralAnalysisTbl.Name = "GeneralAnalysisTbl";
@@ -131,28 +134,9 @@
             this.GeneralAnalysisTbl.Size = new System.Drawing.Size(362, 291);
             this.GeneralAnalysisTbl.TabIndex = 0;
             // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Название процессора:";
-            // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Количество ядер:";
-            // 
             // CPUAnalysisTab
             // 
+            this.CPUAnalysisTab.Controls.Add(this.cpuPanel);
             this.CPUAnalysisTab.Location = new System.Drawing.Point(4, 22);
             this.CPUAnalysisTab.Name = "CPUAnalysisTab";
             this.CPUAnalysisTab.Padding = new System.Windows.Forms.Padding(3);
@@ -160,9 +144,11 @@
             this.CPUAnalysisTab.TabIndex = 1;
             this.CPUAnalysisTab.Text = "Анализ ЦП";
             this.CPUAnalysisTab.UseVisualStyleBackColor = true;
+            this.CPUAnalysisTab.Enter += new System.EventHandler(this.CPUAnalysisTab_Enter);
             // 
             // RAMAnalysisTab
             // 
+            this.RAMAnalysisTab.Controls.Add(this.RAMTab);
             this.RAMAnalysisTab.Location = new System.Drawing.Point(4, 22);
             this.RAMAnalysisTab.Name = "RAMAnalysisTab";
             this.RAMAnalysisTab.Size = new System.Drawing.Size(368, 297);
@@ -172,6 +158,7 @@
             // 
             // DSAnalysisTab
             // 
+            this.DSAnalysisTab.Controls.Add(this.StorageTab);
             this.DSAnalysisTab.Location = new System.Drawing.Point(4, 22);
             this.DSAnalysisTab.Name = "DSAnalysisTab";
             this.DSAnalysisTab.Size = new System.Drawing.Size(368, 297);
@@ -181,12 +168,97 @@
             // 
             // TCNAnalysisTab
             // 
+            this.TCNAnalysisTab.Controls.Add(this.NetworkTab);
             this.TCNAnalysisTab.Location = new System.Drawing.Point(4, 22);
             this.TCNAnalysisTab.Name = "TCNAnalysisTab";
             this.TCNAnalysisTab.Size = new System.Drawing.Size(368, 297);
             this.TCNAnalysisTab.TabIndex = 3;
             this.TCNAnalysisTab.Text = "Анализ ТВС";
             this.TCNAnalysisTab.UseVisualStyleBackColor = true;
+            // 
+            // cpuPanel
+            // 
+            this.cpuPanel.ColumnCount = 2;
+            this.cpuPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.cpuPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.cpuPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cpuPanel.Location = new System.Drawing.Point(3, 3);
+            this.cpuPanel.Name = "cpuPanel";
+            this.cpuPanel.RowCount = 9;
+            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.cpuPanel.Size = new System.Drawing.Size(362, 291);
+            this.cpuPanel.TabIndex = 1;
+            // 
+            // RAMTab
+            // 
+            this.RAMTab.ColumnCount = 2;
+            this.RAMTab.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.RAMTab.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.RAMTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RAMTab.Location = new System.Drawing.Point(0, 0);
+            this.RAMTab.Name = "RAMTab";
+            this.RAMTab.RowCount = 9;
+            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.RAMTab.Size = new System.Drawing.Size(368, 297);
+            this.RAMTab.TabIndex = 1;
+            // 
+            // StorageTab
+            // 
+            this.StorageTab.ColumnCount = 2;
+            this.StorageTab.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.StorageTab.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.StorageTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StorageTab.Location = new System.Drawing.Point(0, 0);
+            this.StorageTab.Name = "StorageTab";
+            this.StorageTab.RowCount = 9;
+            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.StorageTab.Size = new System.Drawing.Size(368, 297);
+            this.StorageTab.TabIndex = 1;
+            // 
+            // NetworkTab
+            // 
+            this.NetworkTab.ColumnCount = 2;
+            this.NetworkTab.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.NetworkTab.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.NetworkTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NetworkTab.Location = new System.Drawing.Point(0, 0);
+            this.NetworkTab.Name = "NetworkTab";
+            this.NetworkTab.RowCount = 9;
+            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.NetworkTab.Size = new System.Drawing.Size(368, 297);
+            this.NetworkTab.TabIndex = 1;
             // 
             // MainView
             // 
@@ -203,8 +275,10 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.GeneralAnalysisTab.ResumeLayout(false);
-            this.GeneralAnalysisTbl.ResumeLayout(false);
-            this.GeneralAnalysisTbl.PerformLayout();
+            this.CPUAnalysisTab.ResumeLayout(false);
+            this.RAMAnalysisTab.ResumeLayout(false);
+            this.DSAnalysisTab.ResumeLayout(false);
+            this.TCNAnalysisTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,8 +294,10 @@
         private System.Windows.Forms.TabPage DSAnalysisTab;
         private System.Windows.Forms.TabPage TCNAnalysisTab;
         private System.Windows.Forms.TableLayoutPanel GeneralAnalysisTbl;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TableLayoutPanel cpuPanel;
+        private System.Windows.Forms.TableLayoutPanel RAMTab;
+        private System.Windows.Forms.TableLayoutPanel StorageTab;
+        private System.Windows.Forms.TableLayoutPanel NetworkTab;
     }
 }
 
