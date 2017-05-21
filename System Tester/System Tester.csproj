@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller.cs" />
+    <Compile Include="CPUTest.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="LogView.cs">
       <SubType>Form</SubType>

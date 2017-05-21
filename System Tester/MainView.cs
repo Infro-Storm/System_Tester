@@ -94,10 +94,7 @@ namespace System_Tester
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            Label newlbl = new Label();
-            newlbl.Text = "test";
-            GeneralAnalysisTbl.Controls.Add(newlbl, 0, 1 );
-
+            Controller.StartCpuTest();
         }
 
         private void GeneralAnalysisTab_Click(object sender, EventArgs e)

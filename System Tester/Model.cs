@@ -393,7 +393,7 @@ namespace System_Tester
         {
             List<DeviceForView> result = base.GetInfo();
             result.Add(new DeviceForView("Производитель", manufacturer, ""));
-            result.Add(new DeviceForView("Установленная частота", configuredClockSpeed.ToString(), "МГц"));
+            result.Add(new DeviceForView("Частота", speed.ToString(), "МГц"));
             result.Add(new DeviceForView("Объем памяти модуля", Model.ValueСonvert(capacityRAM, "б"), ""));//Величина генерируется конвертером
             return result;
         }

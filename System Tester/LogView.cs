@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace System_Tester
 {
+    public delegate void logInvoke(List<Log_message> lst);
     public partial class LogView : Form
     {
         public LogView()
@@ -23,10 +24,16 @@ namespace System_Tester
             Logger.OnRefresh += Model.LoggerWindow.LogRefresh;
         }
 
-        public void LogRefresh(List<Log_message>lst)
+        public void LogRefresh(List<Log_message> lst)
+        {
+            LogView_rtb.BeginInvoke(new logInvoke(BeginInvoke), lst);
+        }
+
+
+        public void BeginInvoke(List<Log_message>lst)
         {
             LogView_rtb.Text = null;
-            foreach (Log_message msg in lst)
+            foreach (Log_message msg in lst.ToArray())
             {
                 Color color = Color.Black;
                 switch (msg.Type) {
