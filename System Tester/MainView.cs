@@ -14,6 +14,7 @@ namespace System_Tester
 
     public partial class MainView : Form
     {
+        delegate void setInfoDelegate(List<DeviceForView> newfilds, TabOfProgramm tab);
         public static MainView RunWindowEx;
         public static MainView GetRWE() {
             return RunWindowEx;
@@ -52,6 +53,11 @@ namespace System_Tester
         }
         public void SetInfo(List<DeviceForView> newfilds, TabOfProgramm tab)
         {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new setInfoDelegate(SetInfo), new object[] { newfilds, tab });
+                return;
+            }
             foreach (DeviceForView filds in newfilds)
             {
                 Label NameLabel = new Label();

@@ -96,6 +96,7 @@ namespace System_Tester
         static bool debug_mode = false;
         static LogView loggerWindow;
         static MainView mainView;
+        public static Int32 thread_count = 0;
         //Геттеры и сеттеры
         public static bool Debug_mode
         {
@@ -111,12 +112,20 @@ namespace System_Tester
                 return loggerWindow;
             }
         }
-        public static string ValueСonvert(Int64 value, string units)
+
+        public static MainView MainWindow
         {
-            if (value > 1099511627776)  return (value / 1099511627776).ToString() + " Т" + units;   //Тера
-            if (value > 1073741824)     return (value / 1073741824).ToString() + " Г" + units;      //Гига
-            if (value > 1048576)        return (value / 1048576).ToString() + " М" + units;         //Мега
-            if (value > 1024)           return (value / 1024).ToString() + " К" + units;            //Кило
+            get
+            {
+                return mainView;
+            }
+        }
+        public static string ValueСonvert(Int64 value, string units, Int32 factor)
+        {
+            if (value > Math.Pow(factor, 4))   return (value / Math.Pow(factor, 4)).ToString() + " Т" + units;  //Тера
+            if (value > Math.Pow(factor, 3))   return (value / Math.Pow(factor, 3)).ToString() + " Г" + units;  //Гига
+            if (value > Math.Pow(factor, 2))   return (value / Math.Pow(factor, 2)).ToString() + " М" + units;  //Мега
+            if (value > factor)         return (value / factor).ToString() + " К" + units;      //Кило
             return value.ToString() + " " + units;
         }
 
@@ -180,223 +189,9 @@ namespace System_Tester
         }
     }
 
-    class Device {
-        public Device(ManagementObject instance)
-        {
-        }
-        public virtual List<DeviceForView> GetInfo()
-        {
-            List<DeviceForView> result = new List<DeviceForView>();
-            return result;
-        }
-    }
 
-    class DeviceWithID:Device
-    {
-        protected string deviceName;
-        public DeviceWithID(ManagementObject instance) : base(instance)
-        {
-            if (instance["DeviceID"] != null) deviceName = instance["DeviceID"].ToString();
-        }
-        public override List<DeviceForView> GetInfo()
-        {
-            List<DeviceForView> result = new List<DeviceForView>();
-            result.Add(new DeviceForView("Идентификатор устройства", deviceName, ""));
-            return result;
-        }
-    }
 
-    public class DeviceForView {
-        string name;
-        string value;
-        string units;
-        public DeviceForView(string name, string value, string units)
-        {
-            this.name = name;
-            this.value = value;
-            this.units = units;
-        }
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-        }
-        public string Value
-        {
-            get
-            {
-                return value;
-            }
-        }
-        public string Unit
-        {
-            get
-            {
-                return units;
-            }
-        }
-    }
 
-    class CPUData : DeviceWithID
-    {
-        string modelNameCPU;
-        string processorID;
-        Int32 maxClockCPU;
-        Int32 cacheSizeL2;
-        Int32 cacheSizeL3;
-        Int32 coreCount;
-        Int32 logicalCoreCount;
-        
-        public CPUData(ManagementObject instance) : base (instance)
-        {
-            foreach (PropertyData nameprp in instance.Properties)
-            {
-                string propertyName = nameprp.Name;
-                if (instance[propertyName] != null)
-                {
-                    switch (propertyName)
-                    {
-                        case "Name":
-                            modelNameCPU = instance[propertyName].ToString();
-                            break;
-                        case "MaxClockSpeed":
-                            maxClockCPU = Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "DeviceID":
-                            break;
-                        case "L2CacheSize":
-                            cacheSizeL2 = Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "L3CacheSize":
-                            cacheSizeL3 = Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "NumberOfCores":
-                            coreCount = Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "NumberOfLogicalProcessors":
-                            logicalCoreCount = Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "ProcessorId":
-                            processorID = instance[propertyName].ToString();
-                            break;
-                        default:
-                            Logger.AddText(nameprp.Name + " " + instance[nameprp.Name].ToString(), Message_level.debug, Message_type.info);
-                            break;
-                    }
 
-                }
-            }
-        }
 
-        public override List<DeviceForView> GetInfo()
-        {
-            List<DeviceForView> result = base.GetInfo();
-            result.Add(new DeviceForView("Название процессора", modelNameCPU, ""));
-            result.Add(new DeviceForView("ID процессора", processorID, ""));
-            result.Add(new DeviceForView("Максимальная частота", maxClockCPU.ToString(), "МГц"));
-            result.Add(new DeviceForView("Размер L2 кэша", cacheSizeL2.ToString(), "Кб"));
-            result.Add(new DeviceForView("Размер L3 кэша", cacheSizeL3.ToString(), "Кб"));
-            result.Add(new DeviceForView("Количество физ. ядер", coreCount.ToString(), ""));
-            result.Add(new DeviceForView("Количество лог. ядер", logicalCoreCount.ToString(), ""));
-            return result;
-        }
-        public List<DeviceForView> GetShortInfo()
-        {
-            List<DeviceForView> result = base.GetInfo();
-            result.Add(new DeviceForView("Название процессора", modelNameCPU, ""));
-            result.Add(new DeviceForView("Максимальная частота", maxClockCPU.ToString(), "МГц"));
-            return result;
-        }
-    }
-
-    class RAMData : Device
-    {
-        MemoryFormFactor fFactor;
-        MemoryType type;
-        string bankLabel;
-        string deviceLocator;
-        string manufacturer;
-        string partNumber;
-        string serialNumber;
-        Int64 capacityRAM;
-        Int32 speed;
-        Int32 configuredClockSpeed;
-
-        public RAMData(ManagementObject instance) :base(instance)
-        {
-            foreach (PropertyData nameprp in instance.Properties)
-            {
-                string propertyName = nameprp.Name;
-                if (instance[propertyName] != null)
-                {
-                    switch (propertyName)
-                    {
-                        case "BankLabel":
-                            bankLabel = instance[propertyName].ToString();
-                            break;
-                        case "Capacity":
-                            capacityRAM = Convert.ToInt64(instance[propertyName].ToString());
-                            break;
-                        case "DeviceID":
-                            break;
-                        case "ConfiguredClockSpeed":
-                            configuredClockSpeed = Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "Speed":
-                            speed = Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "FormFactor":
-                            fFactor =(MemoryFormFactor) Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "MemoryType":
-                            type = (MemoryType) Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "PartNumber":
-                            partNumber = instance[propertyName].ToString();
-                            break;
-                        case "Manufacturer":
-                            manufacturer = instance[propertyName].ToString();
-                            break;
-                        case "SerialNumber":
-                            serialNumber = instance[propertyName].ToString();
-                            break;
-                        case "DeviceLocator":
-                            deviceLocator = instance[propertyName].ToString();
-                            break;
-                        default:
-                            Logger.AddText(nameprp.Name + " " + instance[nameprp.Name].ToString(), Message_level.debug, Message_type.info);
-                            break;
-                    }
-
-                }
-            }
-        }
-
-        public override List<DeviceForView> GetInfo()
-        {
-            List<DeviceForView> result = base.GetInfo();
-            result.Add(new DeviceForView("Производитель", manufacturer, ""));
-            result.Add(new DeviceForView("Модель", partNumber, ""));
-            result.Add(new DeviceForView("Установленная частота", configuredClockSpeed.ToString(), "МГц"));
-            result.Add(new DeviceForView("Частота", speed.ToString(), "МГц"));
-            result.Add(new DeviceForView("Объем памяти модуля", Model.ValueСonvert( capacityRAM, "б") , ""));//Величина генерируется конвертером
-            result.Add(new DeviceForView("Банк памяти", bankLabel, ""));
-            result.Add(new DeviceForView("Слот", deviceLocator, ""));
-            result.Add(new DeviceForView("Форм-фактор", fFactor.ToString(), ""));
-            result.Add(new DeviceForView("Тип памяти", type.ToString(), ""));
-            result.Add(new DeviceForView("Серийный номер", serialNumber, ""));
-            return result;
-        }
-        public List<DeviceForView> GetShortInfo()
-        {
-            List<DeviceForView> result = base.GetInfo();
-            result.Add(new DeviceForView("Производитель", manufacturer, ""));
-            result.Add(new DeviceForView("Частота", speed.ToString(), "МГц"));
-            result.Add(new DeviceForView("Объем памяти модуля", Model.ValueСonvert(capacityRAM, "б"), ""));//Величина генерируется конвертером
-            return result;
-        }
-        
-    }
 }
