@@ -172,6 +172,12 @@ namespace System_Tester
                 mainView.SetInfo(ram.GetShortInfo(), TabOfProgramm.general);
                 mainView.SetInfo(ram.GetInfo(), TabOfProgramm.ram);
             }
+
+            foreach (StorageData storage in GetStorageData())
+            {
+                mainView.SetInfo(storage.GetShortInfo(), TabOfProgramm.general);
+                mainView.SetInfo(storage.GetInfo(), TabOfProgramm.storage);
+            }
         }
         private static List<CPUData> GetCPUData()
         {
@@ -186,6 +192,14 @@ namespace System_Tester
             List<RAMData> RAMs = new List<RAMData>();
             foreach (ManagementObject instance in searcher.Get()) RAMs.Add(new RAMData(instance));
             return RAMs;
+        }
+
+        private static List<StorageData> GetStorageData()
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "Select * From Win32_DiskDrive");
+            List<StorageData> Storages = new List<StorageData>();
+            foreach (ManagementObject instance in searcher.Get()) Storages.Add(new StorageData(instance));
+            return Storages;
         }
     }
 
