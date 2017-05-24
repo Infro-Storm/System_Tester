@@ -9,13 +9,13 @@ namespace System_Tester
 {
     class StorageData : DeviceWithID
     {
-        string modelNameCPU;
-        string processorID;
-        Int32 maxClockCPU;
-        Int32 cacheSizeL2;
-        Int32 cacheSizeL3;
-        Int32 coreCount;
-        Int32 logicalCoreCount;
+        string storageCaption;
+        string serialNumber;
+        string storageFirmware;
+        string storageInterface;
+        string storageModel;
+        Int32 diskPartitions;
+        Int64 storageSize;
 
         public StorageData(ManagementObject instance) : base(instance)
         {
@@ -26,28 +26,28 @@ namespace System_Tester
                 {
                     switch (propertyName)
                     {
-                        case "Name":
-                            modelNameCPU = instance[propertyName].ToString();
+                        case "Caption":
+                            storageCaption = instance[propertyName].ToString();
                             break;
-                        case "MaxClockSpeed":
-                            maxClockCPU = Convert.ToInt32(instance[propertyName].ToString());
+                        case "FirmwareRevision":
+                            storageFirmware = instance[propertyName].ToString();
                             break;
                         case "DeviceID":
                             break;
-                        case "L2CacheSize":
-                            cacheSizeL2 = Convert.ToInt32(instance[propertyName].ToString());
+                        case "InterfaceType":
+                            storageInterface = instance[propertyName].ToString();
                             break;
-                        case "L3CacheSize":
-                            cacheSizeL3 = Convert.ToInt32(instance[propertyName].ToString());
+                        case "Model":
+                            storageModel = instance[propertyName].ToString();
                             break;
-                        case "NumberOfCores":
-                            coreCount = Convert.ToInt32(instance[propertyName].ToString());
+                        case "Partitions":
+                            diskPartitions = Convert.ToInt32(instance[propertyName].ToString());
                             break;
-                        case "NumberOfLogicalProcessors":
-                            logicalCoreCount = Convert.ToInt32(instance[propertyName].ToString());
+                        case "Size":
+                            storageSize = Convert.ToInt64(instance[propertyName].ToString());
                             break;
-                        case "ProcessorId":
-                            processorID = instance[propertyName].ToString();
+                        case "SerialNumber":
+                            serialNumber = instance[propertyName].ToString();
                             break;
                         default:
                             Logger.AddText(nameprp.Name + " " + instance[nameprp.Name].ToString(), Message_level.debug, Message_type.info);
@@ -61,20 +61,20 @@ namespace System_Tester
         public override List<DeviceForView> GetInfo()
         {
             List<DeviceForView> result = base.GetInfo();
-            result.Add(new DeviceForView("Название процессора", modelNameCPU, ""));
-            result.Add(new DeviceForView("ID процессора", processorID, ""));
-            result.Add(new DeviceForView("Максимальная частота", maxClockCPU.ToString(), "МГц"));
-            result.Add(new DeviceForView("Размер L2 кэша", cacheSizeL2.ToString(), "Кб"));
-            result.Add(new DeviceForView("Размер L3 кэша", cacheSizeL3.ToString(), "Кб"));
-            result.Add(new DeviceForView("Количество физ. ядер", coreCount.ToString(), ""));
-            result.Add(new DeviceForView("Количество лог. ядер", logicalCoreCount.ToString(), ""));
+            result.Add(new DeviceForView("Название устройства", storageCaption, ""));
+            result.Add(new DeviceForView("Серийный номер", serialNumber, ""));
+            result.Add(new DeviceForView("Версия прошивки", storageFirmware, ""));
+            result.Add(new DeviceForView("Интерфейс", storageInterface.ToString(), ""));
+            result.Add(new DeviceForView("Модель", storageModel.ToString(), ""));
+            result.Add(new DeviceForView("Разделов на диске", diskPartitions.ToString(), ""));
+            result.Add(new DeviceForView("Ёмкость", Model.ValueСonvert( storageSize, "б", 1024), ""));
             return result;
         }
         public List<DeviceForView> GetShortInfo()
         {
             List<DeviceForView> result = base.GetInfo();
-            result.Add(new DeviceForView("Название процессора", modelNameCPU, ""));
-            result.Add(new DeviceForView("Максимальная частота", maxClockCPU.ToString(), "МГц"));
+            result.Add(new DeviceForView("Название устройства", storageCaption, ""));
+            result.Add(new DeviceForView("Ёмкость", Model.ValueСonvert(storageSize, "б", 1024), ""));
             return result;
         }
     }
