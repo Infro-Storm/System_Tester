@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Controller.cs" />
     <Compile Include="CatchMemoryData.cs" />
+    <Compile Include="TemperatureSensorDate.cs" />
     <Compile Include="StorageData.cs" />
     <Compile Include="CPUData.cs" />
     <Compile Include="CPUTest.cs" />

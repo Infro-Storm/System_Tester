@@ -212,6 +212,11 @@ namespace System_Tester
                mainView.SetInfo(catchMemory.GetShortInfo(), TabOfProgramm.general);
                mainView.SetInfo(catchMemory.GetInfo(), TabOfProgramm.cpu); 
             }
+            foreach (TemperatureSensorDate catchMemory in GetTemperatureSensorDate())
+            {
+                mainView.SetInfo(catchMemory.GetShortInfo(), TabOfProgramm.general);
+                mainView.SetInfo(catchMemory.GetInfo(), TabOfProgramm.general);
+            }
         }
         private static List<CPUData> GetCPUData()
         {
@@ -241,6 +246,15 @@ namespace System_Tester
             List<CatchMemoryData> Storages = new List<CatchMemoryData>();
             foreach (ManagementObject instance in searcher.Get()) Storages.Add(new CatchMemoryData(instance));
             return Storages; 
+        }
+
+        private static List<TemperatureSensorDate> GetTemperatureSensorDate()
+        {
+
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\WMI", "Select * From MSAcpi_ThermalZoneTemperature");
+            List<TemperatureSensorDate> Storages = new List<TemperatureSensorDate>();
+            //foreach (ManagementObject instance in searcher.Get()) Storages.Add(new TemperatureSensorDate(instance));
+            return Storages;
         }
     }
 
