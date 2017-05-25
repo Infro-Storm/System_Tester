@@ -178,6 +178,11 @@ namespace System_Tester
                 mainView.SetInfo(storage.GetShortInfo(), TabOfProgramm.general);
                 mainView.SetInfo(storage.GetInfo(), TabOfProgramm.storage);
             }
+            foreach (CatchMemoryData catchMemory in GetCatchData())
+            { 
+               mainView.SetInfo(catchMemory.GetShortInfo(), TabOfProgramm.general);
+               mainView.SetInfo(catchMemory.GetInfo(), TabOfProgramm.cpu); 
+            }
         }
         private static List<CPUData> GetCPUData()
         {
@@ -200,6 +205,13 @@ namespace System_Tester
             List<StorageData> Storages = new List<StorageData>();
             foreach (ManagementObject instance in searcher.Get()) Storages.Add(new StorageData(instance));
             return Storages;
+        }
+        private static List<CatchMemoryData> GetCatchData()
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "Select * From Win32_CacheMemory");
+            List<CatchMemoryData> Storages = new List<CatchMemoryData>();
+            foreach (ManagementObject instance in searcher.Get()) Storages.Add(new CatchMemoryData(instance));
+            return Storages; 
         }
     }
 
