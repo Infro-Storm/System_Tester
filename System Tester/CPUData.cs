@@ -34,12 +34,6 @@ namespace System_Tester
                             break;
                         case "DeviceID":
                             break;
-                        case "L2CacheSize":
-                            cacheSizeL2 = Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "L3CacheSize":
-                            cacheSizeL3 = Convert.ToInt32(instance[propertyName].ToString());
-                            break;
                         case "NumberOfCores":
                             coreCount = Convert.ToInt32(instance[propertyName].ToString());
                             break;
@@ -64,8 +58,6 @@ namespace System_Tester
             result.Add(new DeviceForView("Название процессора", modelNameCPU, ""));
             result.Add(new DeviceForView("ID процессора", processorID, ""));
             result.Add(new DeviceForView("Максимальная частота", maxClockCPU.ToString(), "МГц"));
-            result.Add(new DeviceForView("Размер L2 кэша", cacheSizeL2.ToString(), "Кб"));
-            result.Add(new DeviceForView("Размер L3 кэша", cacheSizeL3.ToString(), "Кб"));
             result.Add(new DeviceForView("Количество физ. ядер", coreCount.ToString(), ""));
             result.Add(new DeviceForView("Количество лог. ядер", logicalCoreCount.ToString(), ""));
             return result;

@@ -9,13 +9,11 @@ namespace System_Tester
 {
     class CatchMemoryData : Device
     {
-        string modelNameCPU;
-        string processorID;
-        Int32 maxClockCPU;
-        Int32 cacheSizeL2;
-        Int32 cacheSizeL3;
-        Int32 coreCount;
-        Int32 logicalCoreCount;
+        string purposeMemory;
+        Int32 size;
+        CacheLevel levelMemory;
+        ErrorCorrection errorCorrection;
+        CacheType CacheType;
 
         public CatchMemoryData(ManagementObject instance) : base(instance)
         {
@@ -26,28 +24,20 @@ namespace System_Tester
                 {
                     switch (propertyName)
                     {
-                        case "Name":
-                            modelNameCPU = instance[propertyName].ToString();
+                        case "Purpose":
+                            purposeMemory = instance[propertyName].ToString();
                             break;
-                        case "MaxClockSpeed":
-                            maxClockCPU = Convert.ToInt32(instance[propertyName].ToString());
+                        case "InstalledSize":
+                            size = Convert.ToInt32(instance[propertyName].ToString());
                             break;
-                        case "DeviceID":
+                        case "Level":
+                            levelMemory = (CacheLevel) Convert.ToInt32(instance[propertyName].ToString());
                             break;
-                        case "L2CacheSize":
-                            cacheSizeL2 = Convert.ToInt32(instance[propertyName].ToString());
+                        case "ErrorCorrectType":
+                            errorCorrection =(ErrorCorrection) Convert.ToInt32(instance[propertyName].ToString());
                             break;
-                        case "L3CacheSize":
-                            cacheSizeL3 = Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "NumberOfCores":
-                            coreCount = Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "NumberOfLogicalProcessors":
-                            logicalCoreCount = Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "ProcessorId":
-                            processorID = instance[propertyName].ToString();
+                        case "CacheType":
+                            CacheType = (CacheType) Convert.ToInt32(instance[propertyName].ToString());
                             break;
                         default:
                             Logger.AddText(nameprp.Name + " " + instance[nameprp.Name].ToString(), Message_level.debug, Message_type.info);
@@ -61,20 +51,16 @@ namespace System_Tester
         public override List<DeviceForView> GetInfo()
         {
             List<DeviceForView> result = base.GetInfo();
-            result.Add(new DeviceForView("Название процессора", modelNameCPU, ""));
-            result.Add(new DeviceForView("ID процессора", processorID, ""));
-            result.Add(new DeviceForView("Максимальная частота", maxClockCPU.ToString(), "МГц"));
-            result.Add(new DeviceForView("Размер L2 кэша", cacheSizeL2.ToString(), "Кб"));
-            result.Add(new DeviceForView("Размер L3 кэша", cacheSizeL3.ToString(), "Кб"));
-            result.Add(new DeviceForView("Количество физ. ядер", coreCount.ToString(), ""));
-            result.Add(new DeviceForView("Количество лог. ядер", logicalCoreCount.ToString(), ""));
+            result.Add(new DeviceForView("Название кэш-памяти", purposeMemory, ""));
+            result.Add(new DeviceForView("Размер кэш-памяти", size.ToString(), "Кб"));
+            result.Add(new DeviceForView("Уровень кэш-памяти", levelMemory.ToString(), ""));
+            result.Add(new DeviceForView("Коррекция ошибок", errorCorrection.ToString(), ""));
+            result.Add(new DeviceForView("Назначение кэш-памяти", CacheType.ToString(), ""));
             return result;
         }
         public List<DeviceForView> GetShortInfo()
         {
             List<DeviceForView> result = base.GetInfo();
-            result.Add(new DeviceForView("Название процессора", modelNameCPU, ""));
-            result.Add(new DeviceForView("Максимальная частота", maxClockCPU.ToString(), "МГц"));
             return result; 
         }
     }
