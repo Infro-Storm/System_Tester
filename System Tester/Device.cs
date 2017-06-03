@@ -9,16 +9,67 @@ namespace System_Tester
 {
     class Device
     {
-        public Device(ManagementObject instance)
+        protected Dictionary<string, string> props = new Dictionary<string, string>();
+        protected ManagementObject instance;
+        protected static string classWMI;
+        protected string prefix;
+        public string name = "Unnamed_device";
+        public Device()
         {
+
         }
+        public Device(string prefix)
+        {
+            this.prefix = prefix;
+
+        }
+
+        public Device(ManagementObject instance, string prefix)
+        {
+            this.prefix = prefix;
+            this.instance = instance;
+
+        }
+
+        public virtual void InitDevice(ManagementObject instance)
+        {
+            this.instance = instance;
+            foreach (PropertyData nameprp in instance.Properties)
+            {
+                if (nameprp.Value != null) props.Add(prefix + nameprp.Name, nameprp.Value.ToString());
+            }
+
+        }
+
         public virtual List<DeviceForView> GetInfo()
         {
             List<DeviceForView> result = new List<DeviceForView>();
+
+            foreach (KeyValuePair<string, string> entry in props) {
+                string name = Properties.Resources.ResourceManager.GetString(entry.Key);
+                //Logger.AddText("Translated item: \"" + name + '\"');
+                if (name==null && Model.showUnknownValue) result.Add(new DeviceForView(entry.Key, entry.Value, ""));
+                if (name!=null )result.Add(new DeviceForView(name, entry.Value, ""));
+            }
             return result;
+        }
+
+        public static List<T> GetDeviceData<T>(string classWMI)
+        where T : Device, new()
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "Select * From " + classWMI);//Win32_Processor
+            List<T> devices = new List<T>();
+            foreach (ManagementObject instance in searcher.Get())
+            {
+                T newdevice = new T();
+                newdevice.InitDevice(instance);
+                devices.Add(newdevice);
+            }
+            return devices;
         }
     }
 
+    /*
     class DeviceWithID : Device
     {
         protected string deviceName;
@@ -26,14 +77,13 @@ namespace System_Tester
         {
             if (instance["DeviceID"] != null) deviceName = instance["DeviceID"].ToString();
         }
-        public override List<DeviceForView> GetInfo()
+        public override List<DeviceForView> GetInfo(string prefix)
         {
             List<DeviceForView> result = new List<DeviceForView>();
-            result.Add(new DeviceForView("Идентификатор устройства", deviceName, ""));
             return result;
         }
     }
-
+    */
     public class DeviceForView
     {
         string name;

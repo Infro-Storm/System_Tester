@@ -19,9 +19,9 @@ namespace System_Tester
         Int64 capacityRAM;
         Int32 speed;
         Int32 configuredClockSpeed;
-
-        public RAMData(ManagementObject instance) : base(instance)
-        {
+        static string prefix = "RAM_";
+        public RAMData(ManagementObject instance) : base(instance, prefix)
+        {/*
             foreach (PropertyData nameprp in instance.Properties)
             {
                 string propertyName = nameprp.Name;
@@ -67,12 +67,12 @@ namespace System_Tester
                     }
 
                 }
-            }
+            }*/
         }
-
-        public override List<DeviceForView> GetInfo()
+        /*
+        public List<DeviceForView> GetInfo()
         {
-            List<DeviceForView> result = base.GetInfo();
+            List<DeviceForView> result = base.GetInfo("RAM");
             result.Add(new DeviceForView("Производитель", manufacturer, ""));
             result.Add(new DeviceForView("Модель", partNumber, ""));
             result.Add(new DeviceForView("Установленная частота", configuredClockSpeed.ToString(), "МГц"));
@@ -84,13 +84,14 @@ namespace System_Tester
             result.Add(new DeviceForView("Тип памяти", type.ToString(), ""));
             result.Add(new DeviceForView("Серийный номер", serialNumber, ""));
             return result;
-        }
+        }*/
+     
         public List<DeviceForView> GetShortInfo()
         {
-            List<DeviceForView> result = base.GetInfo();
+            List<DeviceForView> result = base.GetInfo();/*
             result.Add(new DeviceForView("Производитель", manufacturer, ""));
             result.Add(new DeviceForView("Частота", speed.ToString(), "МГц"));
-            result.Add(new DeviceForView("Объем памяти модуля", Model.ValueСonvert(capacityRAM, "б", 1024), ""));//Величина генерируется конвертером
+            result.Add(new DeviceForView("Объем памяти модуля", Model.ValueСonvert(capacityRAM, "б", 1024), ""));//Величина генерируется конвертером*/
             return result;
         }
 

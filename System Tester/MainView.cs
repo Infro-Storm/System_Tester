@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,8 +15,9 @@ namespace System_Tester
 
     public partial class MainView : Form
     {
-        delegate void setInfoDelegate(List<DeviceForView> newfilds, TabOfProgramm tab);
+        delegate void setInfoDelegate(List<DeviceForView> newfilds, TabOfProgramm tab, string name);
         public static MainView RunWindowEx;
+        ResourceManager rm = new ResourceManager("MainView", typeof(MainView).Assembly);
         public static MainView GetRWE() {
             return RunWindowEx;
         }
@@ -32,32 +34,40 @@ namespace System_Tester
         public void ShowMessage(string str)
         {
             MessageBox.Show(str);
+
         }
         private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
-
-
-
-
-
-
-
-
-
         }
 
         private void MainView_Load(object sender, EventArgs e)
         {
             //   if (Model.debug_mode) Controller.initDebugMode();
             Controller.GetSystemInfo();
+           // MessageBox.Show(Properties.Resources.ResourceManager.GetString("CPU_NAME"));
         }
-        public void SetInfo(List<DeviceForView> newfilds, TabOfProgramm tab)
+        public void SetInfo(List<DeviceForView> newfilds, TabOfProgramm tab, string name)
         {
             if (InvokeRequired)
             {
                 BeginInvoke(new setInfoDelegate(SetInfo), new object[] { newfilds, tab });
                 return;
             }
+
+            ListView listView;
+
+            switch (tab)
+            {
+                case TabOfProgramm.cpu:
+                    listView = CPU_ListView;
+                    break;
+                default:
+                    listView = CPU_ListView;
+                    break;
+            }
+            ListViewGroup group = new ListViewGroup();
+            group.Header = name;
+            listView.Groups.Add(group);
             foreach (DeviceForView filds in newfilds)
             {
                 Label NameLabel = new Label();
@@ -74,8 +84,14 @@ namespace System_Tester
                         GeneralAnalysisTbl.Controls.Add(ValueLable);
                         break;
                     case TabOfProgramm.cpu:
-                        cpuPanel.Controls.Add(NameLabel);
-                        cpuPanel.Controls.Add(ValueLable);
+                        ListViewItem item = new ListViewItem();
+                        item.Text = filds.Name;
+                        item.SubItems.Add(filds.Value);
+                        item.Group = group;
+                        listView.Items.Add(item);
+                        Logger.AddText("Added new item! Name: " + filds.Name + " Value: " + filds.Name);
+                        //  cpuPanel.Controls.Add(NameLabel);
+                        //  cpuPanel.Controls.Add(ValueLable);
                         break;
                     case TabOfProgramm.network:
                         NetworkTab.Controls.Add(NameLabel);
@@ -117,6 +133,11 @@ namespace System_Tester
         private void CPUAnalysisTab_Enter(object sender, EventArgs e)
         {
             Logger.AddText("Открыта вкладка CPU");
+        }
+
+        private void CPU_ListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

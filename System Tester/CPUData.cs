@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 
 namespace System_Tester
 {
-    class CPUData : DeviceWithID
+    class CPUData : Device
     {
-        string modelNameCPU;
-        string processorID;
-        Int32 maxClockCPU;
-        Int32 cacheSizeL2;
-        Int32 cacheSizeL3;
-        Int32 coreCount;
-        Int32 logicalCoreCount;
-
+        static new string prefix = "CPU_";
+        public new static string classWMI = "Win32_Processor";
+        public new string name;
+        
+        public CPUData() 
+        {
+            base.prefix = prefix;
+        }
+/*
         public CPUData(ManagementObject instance) : base(instance)
         {
             foreach (PropertyData nameprp in instance.Properties)
@@ -49,24 +50,19 @@ namespace System_Tester
                     }
 
                 }
-            }
+            } 
         }
-
+        */
         public override List<DeviceForView> GetInfo()
         {
-            List<DeviceForView> result = base.GetInfo();
-            result.Add(new DeviceForView("Название процессора", modelNameCPU, ""));
-            result.Add(new DeviceForView("ID процессора", processorID, ""));
-            result.Add(new DeviceForView("Максимальная частота", maxClockCPU.ToString(), "МГц"));
-            result.Add(new DeviceForView("Количество физ. ядер", coreCount.ToString(), ""));
-            result.Add(new DeviceForView("Количество лог. ядер", logicalCoreCount.ToString(), ""));
-            return result;
+           name = props[prefix + "DeviceID"];
+             return base.GetInfo();
         }
+        
         public List<DeviceForView> GetShortInfo()
         {
-            List<DeviceForView> result = base.GetInfo();
-            result.Add(new DeviceForView("Название процессора", modelNameCPU, ""));
-            result.Add(new DeviceForView("Максимальная частота", maxClockCPU.ToString(), "МГц"));
+            List<DeviceForView> result = new List<DeviceForView>();
+           // result.Add()
             return result;
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System_Tester
 {
-    class TemperatureSensorDate : DeviceWithID
+    class TemperatureSensorDate : Device
     {
         string modelNameCPU;
         string processorID;
@@ -16,9 +16,9 @@ namespace System_Tester
         Int32 cacheSizeL3;
         Int32 coreCount;
         Int32 logicalCoreCount;
-
-        public TemperatureSensorDate(ManagementObject instance) : base(instance)
-        {
+        static string prefix = "TSENSORS_";
+        public TemperatureSensorDate(ManagementObject instance) : base(instance, prefix)
+        {/*
             Logger.AddText("Данные сенсеров:", Message_level.debug, Message_type.info);
             foreach (PropertyData nameprp in instance.Properties)
             {
@@ -50,19 +50,19 @@ namespace System_Tester
                     }
 
                 }
-            }
+            }*/
         }
-
-        public override List<DeviceForView> GetInfo()
+        /*
+        public List<DeviceForView> GetInfo()
         {
-            List<DeviceForView> result = base.GetInfo();
+            List<DeviceForView> result = base.GetInfo("TSENOSR");
             result.Add(new DeviceForView("Название процессора", modelNameCPU, ""));
             result.Add(new DeviceForView("ID процессора", processorID, ""));
             result.Add(new DeviceForView("Максимальная частота", maxClockCPU.ToString(), "МГц"));
             result.Add(new DeviceForView("Количество физ. ядер", coreCount.ToString(), ""));
             result.Add(new DeviceForView("Количество лог. ядер", logicalCoreCount.ToString(), ""));
             return result;
-        }
+        }*/
         public List<DeviceForView> GetShortInfo()
         {
             List<DeviceForView> result = base.GetInfo();

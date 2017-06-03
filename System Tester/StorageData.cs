@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System_Tester
 {
-    class StorageData : DeviceWithID
+    class StorageData : Device
     {
         string storageCaption;
         string serialNumber;
@@ -16,9 +16,9 @@ namespace System_Tester
         string storageModel;
         Int32 diskPartitions;
         Int64 storageSize;
-
-        public StorageData(ManagementObject instance) : base(instance)
-        {
+        static string prefix = "SMEMORY_";
+        public StorageData(ManagementObject instance) : base(instance, prefix)
+        {/*
             foreach (PropertyData nameprp in instance.Properties)
             {
                 string propertyName = nameprp.Name;
@@ -55,12 +55,12 @@ namespace System_Tester
                     }
 
                 }
-            }
+            }*/
         }
-
-        public override List<DeviceForView> GetInfo()
+        /*
+        public List<DeviceForView> GetInfo()
         {
-            List<DeviceForView> result = base.GetInfo();
+            List<DeviceForView> result = base.GetInfo("SMEMORY");
             result.Add(new DeviceForView("Название устройства", storageCaption, ""));
             result.Add(new DeviceForView("Серийный номер", serialNumber, ""));
             result.Add(new DeviceForView("Версия прошивки", storageFirmware, ""));
@@ -69,12 +69,12 @@ namespace System_Tester
             result.Add(new DeviceForView("Разделов на диске", diskPartitions.ToString(), ""));
             result.Add(new DeviceForView("Ёмкость", Model.ValueСonvert( storageSize, "б", 1024), ""));
             return result;
-        }
+        }*/
         public List<DeviceForView> GetShortInfo()
         {
-            List<DeviceForView> result = base.GetInfo();
+            List<DeviceForView> result = base.GetInfo();/*
             result.Add(new DeviceForView("Название устройства", storageCaption, ""));
-            result.Add(new DeviceForView("Ёмкость", Model.ValueСonvert(storageSize, "б", 1024), ""));
+            result.Add(new DeviceForView("Ёмкость", Model.ValueСonvert(storageSize, "б", 1024), ""));*/
             return result;
         }
     }

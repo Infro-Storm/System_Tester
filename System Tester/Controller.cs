@@ -59,7 +59,7 @@ namespace System_Tester
         {
             btest.Add(new DeviceForView("Результат CPU", Model.ValueСonvert( LOAD * Environment.ProcessorCount / test_speed.ElapsedMilliseconds * 1000, "", 1000),""));
             //Logger.AddText("Test time:" + Model.ValueСonvert(LOAD * Environment.ProcessorCount / test_speed.ElapsedMilliseconds * 1000, "", 1000));
-            Model.MainWindow.SetInfo(btest, TabOfProgramm.general);
+            Model.MainWindow.SetInfo(btest, TabOfProgramm.general, "Результат тестирования");
         }
     }
 }

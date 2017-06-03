@@ -4,8 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Management;
-
-
+using System.Resources;
 
 namespace System_Tester
 {
@@ -126,6 +125,7 @@ namespace System_Tester
         static LogView loggerWindow;
         static MainView mainView;
         public static Int32 thread_count = 0;
+        public static bool showUnknownValue = false;
         //Геттеры и сеттеры
         public static bool Debug_mode
         {
@@ -151,6 +151,7 @@ namespace System_Tester
         }
         public static string ValueСonvert(Int64 value, string units, Int32 factor)
         {
+
             if (value > Math.Pow(factor, 4))   return (value / Math.Pow(factor, 4)).ToString() + " Т" + units;  //Тера
             if (value > Math.Pow(factor, 3))   return (value / Math.Pow(factor, 3)).ToString() + " Г" + units;  //Гига
             if (value > Math.Pow(factor, 2))   return (value / Math.Pow(factor, 2)).ToString() + " М" + units;  //Мега
@@ -190,41 +191,42 @@ namespace System_Tester
 
         public static void GetCompuerData()
         {
-            foreach (CPUData cpu in GetCPUData())
+            foreach (CPUData cpu in Device.GetDeviceData<CPUData>("Win32_Processor"))
             {
-                mainView.SetInfo(cpu.GetShortInfo(), TabOfProgramm.general);
-                mainView.SetInfo(cpu.GetInfo(), TabOfProgramm.cpu);
+               // mainView.SetInfo(cpu.GetShortInfo(), TabOfProgramm.general);
+                mainView.SetInfo(cpu.GetInfo(), TabOfProgramm.cpu, cpu.name);
             }
 
             foreach (RAMData ram in GetRAMData())
             {
-                mainView.SetInfo(ram.GetShortInfo(), TabOfProgramm.general);
-                mainView.SetInfo(ram.GetInfo(), TabOfProgramm.ram);
+               // mainView.SetInfo(ram.GetShortInfo(), TabOfProgramm.general);
+                mainView.SetInfo(ram.GetInfo(), TabOfProgramm.ram, ram.name);
             }
 
             foreach (StorageData storage in GetStorageData())
             {
-                mainView.SetInfo(storage.GetShortInfo(), TabOfProgramm.general);
-                mainView.SetInfo(storage.GetInfo(), TabOfProgramm.storage);
+                //mainView.SetInfo(storage.GetShortInfo(), TabOfProgramm.general);
+                mainView.SetInfo(storage.GetInfo(), TabOfProgramm.storage, storage.name);
             }
             foreach (CatchMemoryData catchMemory in GetCatchData())
             { 
-               mainView.SetInfo(catchMemory.GetShortInfo(), TabOfProgramm.general);
-               mainView.SetInfo(catchMemory.GetInfo(), TabOfProgramm.cpu); 
+               //mainView.SetInfo(catchMemory.GetShortInfo(), TabOfProgramm.general);
+               mainView.SetInfo(catchMemory.GetInfo(), TabOfProgramm.cpu, catchMemory.name); 
             }
-            foreach (TemperatureSensorDate catchMemory in GetTemperatureSensorDate())
+            foreach (TemperatureSensorDate TempSensor in GetTemperatureSensorDate())
             {
-                mainView.SetInfo(catchMemory.GetShortInfo(), TabOfProgramm.general);
-                mainView.SetInfo(catchMemory.GetInfo(), TabOfProgramm.general);
+               // mainView.SetInfo(catchMemory.GetShortInfo(), TabOfProgramm.general);
+                mainView.SetInfo(TempSensor.GetInfo(), TabOfProgramm.general, TempSensor.name);
             }
         }
+        /*
         private static List<CPUData> GetCPUData()
         {
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "Select * From Win32_Processor");
             List<CPUData> CPUs = new List<CPUData>();
             foreach (ManagementObject instance in searcher.Get()) CPUs.Add(new CPUData(instance));
             return CPUs;
-        }
+        }*/
         private static List<RAMData> GetRAMData()
         {
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "Select * From Win32_PhysicalMemory");

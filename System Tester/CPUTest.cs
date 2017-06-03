@@ -40,7 +40,7 @@ namespace System_Tester
             if (Model.thread_count < 1) Controller.Thread_Finish();
         }
 
-        public void getThreadResult()
+        public void GetThreadResult()
         {
             double flop = (double)load / sWatch.ElapsedMilliseconds * 1000;
             Logger.AddText("Поток: " + name + " Кол-во операций: " + load + " Производительность ядра:" + Model.ValueСonvert( (long) flop,  "флоп", 1000) , Message_level.debug, Message_type.debug);

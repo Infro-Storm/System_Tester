@@ -33,15 +33,17 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.GeneralAnalysisTab = new System.Windows.Forms.TabPage();
-            this.GeneralAnalysisTbl = new System.Windows.Forms.TableLayoutPanel();
             this.CPUAnalysisTab = new System.Windows.Forms.TabPage();
             this.RAMAnalysisTab = new System.Windows.Forms.TabPage();
-            this.DSAnalysisTab = new System.Windows.Forms.TabPage();
-            this.TCNAnalysisTab = new System.Windows.Forms.TabPage();
-            this.cpuPanel = new System.Windows.Forms.TableLayoutPanel();
             this.RAMTab = new System.Windows.Forms.TableLayoutPanel();
+            this.DSAnalysisTab = new System.Windows.Forms.TabPage();
             this.StorageTab = new System.Windows.Forms.TableLayoutPanel();
+            this.TCNAnalysisTab = new System.Windows.Forms.TabPage();
             this.NetworkTab = new System.Windows.Forms.TableLayoutPanel();
+            this.GeneralAnalysisTbl = new System.Windows.Forms.TableLayoutPanel();
+            this.CPU_ListView = new System.Windows.Forms.ListView();
+            this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.GeneralAnalysisTab.SuspendLayout();
@@ -113,30 +115,9 @@
             this.GeneralAnalysisTab.UseVisualStyleBackColor = true;
             this.GeneralAnalysisTab.Click += new System.EventHandler(this.GeneralAnalysisTab_Click);
             // 
-            // GeneralAnalysisTbl
-            // 
-            this.GeneralAnalysisTbl.ColumnCount = 2;
-            this.GeneralAnalysisTbl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.GeneralAnalysisTbl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.GeneralAnalysisTbl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GeneralAnalysisTbl.Location = new System.Drawing.Point(3, 3);
-            this.GeneralAnalysisTbl.Name = "GeneralAnalysisTbl";
-            this.GeneralAnalysisTbl.RowCount = 9;
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.Size = new System.Drawing.Size(362, 291);
-            this.GeneralAnalysisTbl.TabIndex = 0;
-            // 
             // CPUAnalysisTab
             // 
-            this.CPUAnalysisTab.Controls.Add(this.cpuPanel);
+            this.CPUAnalysisTab.Controls.Add(this.CPU_ListView);
             this.CPUAnalysisTab.Location = new System.Drawing.Point(4, 22);
             this.CPUAnalysisTab.Name = "CPUAnalysisTab";
             this.CPUAnalysisTab.Padding = new System.Windows.Forms.Padding(3);
@@ -155,47 +136,6 @@
             this.RAMAnalysisTab.TabIndex = 2;
             this.RAMAnalysisTab.Text = "Анализ ОЗУ";
             this.RAMAnalysisTab.UseVisualStyleBackColor = true;
-            // 
-            // DSAnalysisTab
-            // 
-            this.DSAnalysisTab.Controls.Add(this.StorageTab);
-            this.DSAnalysisTab.Location = new System.Drawing.Point(4, 22);
-            this.DSAnalysisTab.Name = "DSAnalysisTab";
-            this.DSAnalysisTab.Size = new System.Drawing.Size(368, 297);
-            this.DSAnalysisTab.TabIndex = 4;
-            this.DSAnalysisTab.Text = "Анализ ЗУ";
-            this.DSAnalysisTab.UseVisualStyleBackColor = true;
-            // 
-            // TCNAnalysisTab
-            // 
-            this.TCNAnalysisTab.Controls.Add(this.NetworkTab);
-            this.TCNAnalysisTab.Location = new System.Drawing.Point(4, 22);
-            this.TCNAnalysisTab.Name = "TCNAnalysisTab";
-            this.TCNAnalysisTab.Size = new System.Drawing.Size(368, 297);
-            this.TCNAnalysisTab.TabIndex = 3;
-            this.TCNAnalysisTab.Text = "Анализ ТВС";
-            this.TCNAnalysisTab.UseVisualStyleBackColor = true;
-            // 
-            // cpuPanel
-            // 
-            this.cpuPanel.ColumnCount = 2;
-            this.cpuPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.cpuPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.cpuPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cpuPanel.Location = new System.Drawing.Point(3, 3);
-            this.cpuPanel.Name = "cpuPanel";
-            this.cpuPanel.RowCount = 9;
-            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.cpuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.cpuPanel.Size = new System.Drawing.Size(362, 291);
-            this.cpuPanel.TabIndex = 1;
             // 
             // RAMTab
             // 
@@ -218,6 +158,16 @@
             this.RAMTab.Size = new System.Drawing.Size(368, 297);
             this.RAMTab.TabIndex = 1;
             // 
+            // DSAnalysisTab
+            // 
+            this.DSAnalysisTab.Controls.Add(this.StorageTab);
+            this.DSAnalysisTab.Location = new System.Drawing.Point(4, 22);
+            this.DSAnalysisTab.Name = "DSAnalysisTab";
+            this.DSAnalysisTab.Size = new System.Drawing.Size(368, 297);
+            this.DSAnalysisTab.TabIndex = 4;
+            this.DSAnalysisTab.Text = "Анализ ЗУ";
+            this.DSAnalysisTab.UseVisualStyleBackColor = true;
+            // 
             // StorageTab
             // 
             this.StorageTab.ColumnCount = 2;
@@ -239,6 +189,16 @@
             this.StorageTab.Size = new System.Drawing.Size(368, 297);
             this.StorageTab.TabIndex = 1;
             // 
+            // TCNAnalysisTab
+            // 
+            this.TCNAnalysisTab.Controls.Add(this.NetworkTab);
+            this.TCNAnalysisTab.Location = new System.Drawing.Point(4, 22);
+            this.TCNAnalysisTab.Name = "TCNAnalysisTab";
+            this.TCNAnalysisTab.Size = new System.Drawing.Size(368, 297);
+            this.TCNAnalysisTab.TabIndex = 3;
+            this.TCNAnalysisTab.Text = "Анализ ТВС";
+            this.TCNAnalysisTab.UseVisualStyleBackColor = true;
+            // 
             // NetworkTab
             // 
             this.NetworkTab.ColumnCount = 2;
@@ -259,6 +219,49 @@
             this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.NetworkTab.Size = new System.Drawing.Size(368, 297);
             this.NetworkTab.TabIndex = 1;
+            // 
+            // GeneralAnalysisTbl
+            // 
+            this.GeneralAnalysisTbl.ColumnCount = 2;
+            this.GeneralAnalysisTbl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.GeneralAnalysisTbl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.GeneralAnalysisTbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GeneralAnalysisTbl.Location = new System.Drawing.Point(3, 3);
+            this.GeneralAnalysisTbl.Name = "GeneralAnalysisTbl";
+            this.GeneralAnalysisTbl.RowCount = 9;
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.GeneralAnalysisTbl.Size = new System.Drawing.Size(362, 291);
+            this.GeneralAnalysisTbl.TabIndex = 0;
+            // 
+            // CPU_ListView
+            // 
+            this.CPU_ListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnName,
+            this.columnValue});
+            this.CPU_ListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CPU_ListView.Location = new System.Drawing.Point(3, 3);
+            this.CPU_ListView.Name = "CPU_ListView";
+            this.CPU_ListView.Size = new System.Drawing.Size(362, 291);
+            this.CPU_ListView.TabIndex = 0;
+            this.CPU_ListView.UseCompatibleStateImageBehavior = false;
+            this.CPU_ListView.View = System.Windows.Forms.View.Details;
+            this.CPU_ListView.SelectedIndexChanged += new System.EventHandler(this.CPU_ListView_SelectedIndexChanged);
+            // 
+            // columnName
+            // 
+            this.columnName.Text = "Название";
+            // 
+            // columnValue
+            // 
+            this.columnValue.Text = "Значение";
             // 
             // MainView
             // 
@@ -293,11 +296,13 @@
         private System.Windows.Forms.TabPage RAMAnalysisTab;
         private System.Windows.Forms.TabPage DSAnalysisTab;
         private System.Windows.Forms.TabPage TCNAnalysisTab;
-        private System.Windows.Forms.TableLayoutPanel GeneralAnalysisTbl;
-        private System.Windows.Forms.TableLayoutPanel cpuPanel;
         private System.Windows.Forms.TableLayoutPanel RAMTab;
         private System.Windows.Forms.TableLayoutPanel StorageTab;
         private System.Windows.Forms.TableLayoutPanel NetworkTab;
+        private System.Windows.Forms.TableLayoutPanel GeneralAnalysisTbl;
+        private System.Windows.Forms.ListView CPU_ListView;
+        private System.Windows.Forms.ColumnHeader columnName;
+        private System.Windows.Forms.ColumnHeader columnValue;
     }
 }
 
