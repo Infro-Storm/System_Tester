@@ -125,7 +125,7 @@ namespace System_Tester
         static LogView loggerWindow;
         static MainView mainView;
         public static Int32 thread_count = 0;
-        public static bool showUnknownValue = false;
+        public static bool showUnknownValue = true;//false;
         //Геттеры и сеттеры
         public static bool Debug_mode
         {
@@ -191,78 +191,33 @@ namespace System_Tester
 
         public static void GetCompuerData()
         {
-            foreach (CPUData cpu in Device.GetDeviceData<CPUData>("Win32_Processor"))
+            foreach (CPUData cpu in Device.GetDeviceData<CPUData>(CPUData.classWMI))
             {
                // mainView.SetInfo(cpu.GetShortInfo(), TabOfProgramm.general);
                 mainView.SetInfo(cpu.GetInfo(), TabOfProgramm.cpu, cpu.name);
             }
 
-            foreach (RAMData ram in GetRAMData())
+            foreach (RAMData ram in Device.GetDeviceData<RAMData>(RAMData.classWMI))
             {
                // mainView.SetInfo(ram.GetShortInfo(), TabOfProgramm.general);
                 mainView.SetInfo(ram.GetInfo(), TabOfProgramm.ram, ram.name);
             }
 
-            foreach (StorageData storage in GetStorageData())
+            foreach (StorageData storage in Device.GetDeviceData<StorageData>(StorageData.classWMI))
             {
                 //mainView.SetInfo(storage.GetShortInfo(), TabOfProgramm.general);
                 mainView.SetInfo(storage.GetInfo(), TabOfProgramm.storage, storage.name);
             }
-            foreach (CatchMemoryData catchMemory in GetCatchData())
+            foreach (CatchMemoryData catchMemory in Device.GetDeviceData<CatchMemoryData>(CatchMemoryData.classWMI))
             { 
                //mainView.SetInfo(catchMemory.GetShortInfo(), TabOfProgramm.general);
                mainView.SetInfo(catchMemory.GetInfo(), TabOfProgramm.cpu, catchMemory.name); 
             }
-            foreach (TemperatureSensorDate TempSensor in GetTemperatureSensorDate())
+            foreach (TemperatureSensorDate TempSensor in Device.GetDeviceData<TemperatureSensorDate>(TemperatureSensorDate.classWMI))
             {
                // mainView.SetInfo(catchMemory.GetShortInfo(), TabOfProgramm.general);
                 mainView.SetInfo(TempSensor.GetInfo(), TabOfProgramm.general, TempSensor.name);
             }
         }
-        /*
-        private static List<CPUData> GetCPUData()
-        {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "Select * From Win32_Processor");
-            List<CPUData> CPUs = new List<CPUData>();
-            foreach (ManagementObject instance in searcher.Get()) CPUs.Add(new CPUData(instance));
-            return CPUs;
-        }*/
-        private static List<RAMData> GetRAMData()
-        {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "Select * From Win32_PhysicalMemory");
-            List<RAMData> RAMs = new List<RAMData>();
-            foreach (ManagementObject instance in searcher.Get()) RAMs.Add(new RAMData(instance));
-            return RAMs;
-        }
-
-        private static List<StorageData> GetStorageData()
-        {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "Select * From Win32_DiskDrive");
-            List<StorageData> Storages = new List<StorageData>();
-            foreach (ManagementObject instance in searcher.Get()) Storages.Add(new StorageData(instance));
-            return Storages;
-        }
-        private static List<CatchMemoryData> GetCatchData()
-        {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "Select * From Win32_CacheMemory");
-            List<CatchMemoryData> Storages = new List<CatchMemoryData>();
-            foreach (ManagementObject instance in searcher.Get()) Storages.Add(new CatchMemoryData(instance));
-            return Storages; 
-        }
-
-        private static List<TemperatureSensorDate> GetTemperatureSensorDate()
-        {
-
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\WMI", "Select * From MSAcpi_ThermalZoneTemperature");
-            List<TemperatureSensorDate> Storages = new List<TemperatureSensorDate>();
-            //foreach (ManagementObject instance in searcher.Get()) Storages.Add(new TemperatureSensorDate(instance));
-            return Storages;
-        }
     }
-
-
-
-
-
-
 }

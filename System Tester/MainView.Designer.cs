@@ -34,16 +34,24 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.GeneralAnalysisTab = new System.Windows.Forms.TabPage();
             this.CPUAnalysisTab = new System.Windows.Forms.TabPage();
-            this.RAMAnalysisTab = new System.Windows.Forms.TabPage();
-            this.RAMTab = new System.Windows.Forms.TableLayoutPanel();
-            this.DSAnalysisTab = new System.Windows.Forms.TabPage();
-            this.StorageTab = new System.Windows.Forms.TableLayoutPanel();
-            this.TCNAnalysisTab = new System.Windows.Forms.TabPage();
-            this.NetworkTab = new System.Windows.Forms.TableLayoutPanel();
-            this.GeneralAnalysisTbl = new System.Windows.Forms.TableLayoutPanel();
             this.CPU_ListView = new System.Windows.Forms.ListView();
             this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.RAMAnalysisTab = new System.Windows.Forms.TabPage();
+            this.DSAnalysisTab = new System.Windows.Forms.TabPage();
+            this.TCNAnalysisTab = new System.Windows.Forms.TabPage();
+            this.GeneralListView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.RAMListView = new System.Windows.Forms.ListView();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.storageListView = new System.Windows.Forms.ListView();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.networkListView = new System.Windows.Forms.ListView();
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.GeneralAnalysisTab.SuspendLayout();
@@ -105,7 +113,7 @@
             // 
             // GeneralAnalysisTab
             // 
-            this.GeneralAnalysisTab.Controls.Add(this.GeneralAnalysisTbl);
+            this.GeneralAnalysisTab.Controls.Add(this.GeneralListView);
             this.GeneralAnalysisTab.Location = new System.Drawing.Point(4, 22);
             this.GeneralAnalysisTab.Name = "GeneralAnalysisTab";
             this.GeneralAnalysisTab.Padding = new System.Windows.Forms.Padding(3);
@@ -127,120 +135,6 @@
             this.CPUAnalysisTab.UseVisualStyleBackColor = true;
             this.CPUAnalysisTab.Enter += new System.EventHandler(this.CPUAnalysisTab_Enter);
             // 
-            // RAMAnalysisTab
-            // 
-            this.RAMAnalysisTab.Controls.Add(this.RAMTab);
-            this.RAMAnalysisTab.Location = new System.Drawing.Point(4, 22);
-            this.RAMAnalysisTab.Name = "RAMAnalysisTab";
-            this.RAMAnalysisTab.Size = new System.Drawing.Size(368, 297);
-            this.RAMAnalysisTab.TabIndex = 2;
-            this.RAMAnalysisTab.Text = "Анализ ОЗУ";
-            this.RAMAnalysisTab.UseVisualStyleBackColor = true;
-            // 
-            // RAMTab
-            // 
-            this.RAMTab.ColumnCount = 2;
-            this.RAMTab.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.RAMTab.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.RAMTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RAMTab.Location = new System.Drawing.Point(0, 0);
-            this.RAMTab.Name = "RAMTab";
-            this.RAMTab.RowCount = 9;
-            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.RAMTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.RAMTab.Size = new System.Drawing.Size(368, 297);
-            this.RAMTab.TabIndex = 1;
-            // 
-            // DSAnalysisTab
-            // 
-            this.DSAnalysisTab.Controls.Add(this.StorageTab);
-            this.DSAnalysisTab.Location = new System.Drawing.Point(4, 22);
-            this.DSAnalysisTab.Name = "DSAnalysisTab";
-            this.DSAnalysisTab.Size = new System.Drawing.Size(368, 297);
-            this.DSAnalysisTab.TabIndex = 4;
-            this.DSAnalysisTab.Text = "Анализ ЗУ";
-            this.DSAnalysisTab.UseVisualStyleBackColor = true;
-            // 
-            // StorageTab
-            // 
-            this.StorageTab.ColumnCount = 2;
-            this.StorageTab.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.StorageTab.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.StorageTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StorageTab.Location = new System.Drawing.Point(0, 0);
-            this.StorageTab.Name = "StorageTab";
-            this.StorageTab.RowCount = 9;
-            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.StorageTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.StorageTab.Size = new System.Drawing.Size(368, 297);
-            this.StorageTab.TabIndex = 1;
-            // 
-            // TCNAnalysisTab
-            // 
-            this.TCNAnalysisTab.Controls.Add(this.NetworkTab);
-            this.TCNAnalysisTab.Location = new System.Drawing.Point(4, 22);
-            this.TCNAnalysisTab.Name = "TCNAnalysisTab";
-            this.TCNAnalysisTab.Size = new System.Drawing.Size(368, 297);
-            this.TCNAnalysisTab.TabIndex = 3;
-            this.TCNAnalysisTab.Text = "Анализ ТВС";
-            this.TCNAnalysisTab.UseVisualStyleBackColor = true;
-            // 
-            // NetworkTab
-            // 
-            this.NetworkTab.ColumnCount = 2;
-            this.NetworkTab.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.NetworkTab.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.NetworkTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.NetworkTab.Location = new System.Drawing.Point(0, 0);
-            this.NetworkTab.Name = "NetworkTab";
-            this.NetworkTab.RowCount = 9;
-            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.NetworkTab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.NetworkTab.Size = new System.Drawing.Size(368, 297);
-            this.NetworkTab.TabIndex = 1;
-            // 
-            // GeneralAnalysisTbl
-            // 
-            this.GeneralAnalysisTbl.ColumnCount = 2;
-            this.GeneralAnalysisTbl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.GeneralAnalysisTbl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.GeneralAnalysisTbl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GeneralAnalysisTbl.Location = new System.Drawing.Point(3, 3);
-            this.GeneralAnalysisTbl.Name = "GeneralAnalysisTbl";
-            this.GeneralAnalysisTbl.RowCount = 9;
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.GeneralAnalysisTbl.Size = new System.Drawing.Size(362, 291);
-            this.GeneralAnalysisTbl.TabIndex = 0;
-            // 
             // CPU_ListView
             // 
             this.CPU_ListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -258,10 +152,134 @@
             // columnName
             // 
             this.columnName.Text = "Название";
+            this.columnName.Width = 62;
             // 
             // columnValue
             // 
             this.columnValue.Text = "Значение";
+            this.columnValue.Width = 333;
+            // 
+            // RAMAnalysisTab
+            // 
+            this.RAMAnalysisTab.Controls.Add(this.RAMListView);
+            this.RAMAnalysisTab.Location = new System.Drawing.Point(4, 22);
+            this.RAMAnalysisTab.Name = "RAMAnalysisTab";
+            this.RAMAnalysisTab.Size = new System.Drawing.Size(368, 297);
+            this.RAMAnalysisTab.TabIndex = 2;
+            this.RAMAnalysisTab.Text = "Анализ ОЗУ";
+            this.RAMAnalysisTab.UseVisualStyleBackColor = true;
+            // 
+            // DSAnalysisTab
+            // 
+            this.DSAnalysisTab.Controls.Add(this.storageListView);
+            this.DSAnalysisTab.Location = new System.Drawing.Point(4, 22);
+            this.DSAnalysisTab.Name = "DSAnalysisTab";
+            this.DSAnalysisTab.Size = new System.Drawing.Size(368, 297);
+            this.DSAnalysisTab.TabIndex = 4;
+            this.DSAnalysisTab.Text = "Анализ ЗУ";
+            this.DSAnalysisTab.UseVisualStyleBackColor = true;
+            // 
+            // TCNAnalysisTab
+            // 
+            this.TCNAnalysisTab.Controls.Add(this.networkListView);
+            this.TCNAnalysisTab.Location = new System.Drawing.Point(4, 22);
+            this.TCNAnalysisTab.Name = "TCNAnalysisTab";
+            this.TCNAnalysisTab.Size = new System.Drawing.Size(368, 297);
+            this.TCNAnalysisTab.TabIndex = 3;
+            this.TCNAnalysisTab.Text = "Анализ ТВС";
+            this.TCNAnalysisTab.UseVisualStyleBackColor = true;
+            // 
+            // GeneralListView
+            // 
+            this.GeneralListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.GeneralListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GeneralListView.Location = new System.Drawing.Point(3, 3);
+            this.GeneralListView.Name = "GeneralListView";
+            this.GeneralListView.Size = new System.Drawing.Size(362, 291);
+            this.GeneralListView.TabIndex = 1;
+            this.GeneralListView.UseCompatibleStateImageBehavior = false;
+            this.GeneralListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Название";
+            this.columnHeader1.Width = 62;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Значение";
+            this.columnHeader2.Width = 333;
+            // 
+            // RAMListView
+            // 
+            this.RAMListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4});
+            this.RAMListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RAMListView.Location = new System.Drawing.Point(0, 0);
+            this.RAMListView.Name = "RAMListView";
+            this.RAMListView.Size = new System.Drawing.Size(368, 297);
+            this.RAMListView.TabIndex = 1;
+            this.RAMListView.UseCompatibleStateImageBehavior = false;
+            this.RAMListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Название";
+            this.columnHeader3.Width = 62;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Значение";
+            this.columnHeader4.Width = 333;
+            // 
+            // storageListView
+            // 
+            this.storageListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader5,
+            this.columnHeader6});
+            this.storageListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.storageListView.Location = new System.Drawing.Point(0, 0);
+            this.storageListView.Name = "storageListView";
+            this.storageListView.Size = new System.Drawing.Size(368, 297);
+            this.storageListView.TabIndex = 1;
+            this.storageListView.UseCompatibleStateImageBehavior = false;
+            this.storageListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Название";
+            this.columnHeader5.Width = 62;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Значение";
+            this.columnHeader6.Width = 333;
+            // 
+            // networkListView
+            // 
+            this.networkListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader7,
+            this.columnHeader8});
+            this.networkListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.networkListView.Location = new System.Drawing.Point(0, 0);
+            this.networkListView.Name = "networkListView";
+            this.networkListView.Size = new System.Drawing.Size(368, 297);
+            this.networkListView.TabIndex = 1;
+            this.networkListView.UseCompatibleStateImageBehavior = false;
+            this.networkListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Название";
+            this.columnHeader7.Width = 62;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Значение";
+            this.columnHeader8.Width = 333;
             // 
             // MainView
             // 
@@ -296,13 +314,21 @@
         private System.Windows.Forms.TabPage RAMAnalysisTab;
         private System.Windows.Forms.TabPage DSAnalysisTab;
         private System.Windows.Forms.TabPage TCNAnalysisTab;
-        private System.Windows.Forms.TableLayoutPanel RAMTab;
-        private System.Windows.Forms.TableLayoutPanel StorageTab;
-        private System.Windows.Forms.TableLayoutPanel NetworkTab;
-        private System.Windows.Forms.TableLayoutPanel GeneralAnalysisTbl;
         private System.Windows.Forms.ListView CPU_ListView;
         private System.Windows.Forms.ColumnHeader columnName;
         private System.Windows.Forms.ColumnHeader columnValue;
+        private System.Windows.Forms.ListView GeneralListView;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ListView RAMListView;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ListView storageListView;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ListView networkListView;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
     }
 }
 

@@ -61,7 +61,52 @@ namespace System_Tester.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на ПроцессорF.
+        ///   Ищет локализованную строку, похожую на Тип данных.
+        /// </summary>
+        internal static string CMEMORY_CacheType {
+            get {
+                return ResourceManager.GetString("CMEMORY_CacheType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Коррекция ошибок.
+        /// </summary>
+        internal static string CMEMORY_ErrorCorrectType {
+            get {
+                return ResourceManager.GetString("CMEMORY_ErrorCorrectType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ёмкость.
+        /// </summary>
+        internal static string CMEMORY_InstalledSize {
+            get {
+                return ResourceManager.GetString("CMEMORY_InstalledSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Уровень.
+        /// </summary>
+        internal static string CMEMORY_Level {
+            get {
+                return ResourceManager.GetString("CMEMORY_Level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Назначение.
+        /// </summary>
+        internal static string CMEMORY_Purpose {
+            get {
+                return ResourceManager.GetString("CMEMORY_Purpose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Название.
         /// </summary>
         internal static string CPU_Name {
             get {

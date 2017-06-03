@@ -17,7 +17,8 @@ namespace System_Tester
         Int32 diskPartitions;
         Int64 storageSize;
         static string prefix = "SMEMORY_";
-        public StorageData(ManagementObject instance) : base(instance, prefix)
+        public new static string classWMI = "Win32_DiskDrive";
+        public StorageData() : base(prefix)
         {/*
             foreach (PropertyData nameprp in instance.Properties)
             {

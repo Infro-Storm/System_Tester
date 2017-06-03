@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Resources;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -43,14 +44,15 @@ namespace System_Tester
         private void MainView_Load(object sender, EventArgs e)
         {
             //   if (Model.debug_mode) Controller.initDebugMode();
-            Controller.GetSystemInfo();
+            Thread refreser = new Thread(Controller.GetSystemInfo);
+            refreser.Start();
            // MessageBox.Show(Properties.Resources.ResourceManager.GetString("CPU_NAME"));
         }
         public void SetInfo(List<DeviceForView> newfilds, TabOfProgramm tab, string name)
         {
             if (InvokeRequired)
             {
-                BeginInvoke(new setInfoDelegate(SetInfo), new object[] { newfilds, tab });
+                BeginInvoke(new setInfoDelegate(SetInfo), new object[] { newfilds, tab, name });
                 return;
             }
 
@@ -58,11 +60,23 @@ namespace System_Tester
 
             switch (tab)
             {
+                case TabOfProgramm.general:
+                    listView = GeneralListView;
+                    break;
                 case TabOfProgramm.cpu:
                     listView = CPU_ListView;
                     break;
+                case TabOfProgramm.ram:
+                    listView = RAMListView;
+                    break;
+                case TabOfProgramm.network:
+                    listView = networkListView;
+                    break;
+                case TabOfProgramm.storage:
+                    listView = storageListView;
+                    break;
                 default:
-                    listView = CPU_ListView;
+                    listView = GeneralListView;
                     break;
             }
             ListViewGroup group = new ListViewGroup();
@@ -70,46 +84,13 @@ namespace System_Tester
             listView.Groups.Add(group);
             foreach (DeviceForView filds in newfilds)
             {
-                Label NameLabel = new Label();
-                NameLabel.Text = filds.Name + ":";
-                NameLabel.AutoSize = true;
-                Label ValueLable = new Label();
-                ValueLable.Text = filds.Value;
-                ValueLable.AutoSize = true;
-                if (filds.Unit != "") ValueLable.Text += " " + filds.Unit;
-                switch (tab)
-                {
-                    case TabOfProgramm.general:
-                        GeneralAnalysisTbl.Controls.Add(NameLabel);
-                        GeneralAnalysisTbl.Controls.Add(ValueLable);
-                        break;
-                    case TabOfProgramm.cpu:
-                        ListViewItem item = new ListViewItem();
-                        item.Text = filds.Name;
-                        item.SubItems.Add(filds.Value);
-                        item.Group = group;
-                        listView.Items.Add(item);
-                        Logger.AddText("Added new item! Name: " + filds.Name + " Value: " + filds.Name);
-                        //  cpuPanel.Controls.Add(NameLabel);
-                        //  cpuPanel.Controls.Add(ValueLable);
-                        break;
-                    case TabOfProgramm.network:
-                        NetworkTab.Controls.Add(NameLabel);
-                        NetworkTab.Controls.Add(ValueLable);
-                        break;
-                    case TabOfProgramm.ram:
-                        RAMTab.Controls.Add(NameLabel);
-                        RAMTab.Controls.Add(ValueLable);
-                        break;
-                    case TabOfProgramm.storage:
-                        StorageTab.Controls.Add(NameLabel);
-                        StorageTab.Controls.Add(ValueLable);
-                        break;
-                    default:
-                        GeneralAnalysisTab.Controls.Add(NameLabel);
-                        GeneralAnalysisTab.Controls.Add(ValueLable);
-                        break;
-                }
+                ListViewItem item = new ListViewItem();
+                item.Text = filds.Name;
+                item.SubItems.Add(filds.Value);
+                item.Group = group;
+                listView.Items.Add(item);
+                listView.Columns[0].Width = -2;
+                listView.Columns[1].Width = -2;
             }
         }
 

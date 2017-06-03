@@ -17,7 +17,8 @@ namespace System_Tester
         Int32 coreCount;
         Int32 logicalCoreCount;
         static string prefix = "TSENSORS_";
-        public TemperatureSensorDate(ManagementObject instance) : base(instance, prefix)
+        public new static string classWMI = "Win32_PerfFormattedData_Counters_ThermalZoneInformation";
+        public TemperatureSensorDate() : base(prefix)
         {/*
             Logger.AddText("Данные сенсеров:", Message_level.debug, Message_type.info);
             foreach (PropertyData nameprp in instance.Properties)

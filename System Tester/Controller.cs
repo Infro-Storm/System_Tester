@@ -27,6 +27,10 @@ namespace System_Tester
         public static void GetSystemInfo()
         {
             Model.GetCompuerData();
+            while (true) {
+                Thread.Sleep(1000);
+                Logger.AddText("Обновление данных!");
+            }
         }
         public static void StartCpuTest()
         {

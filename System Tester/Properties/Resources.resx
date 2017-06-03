@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CMEMORY_CacheType" xml:space="preserve">
+    <value>Тип данных</value>
+  </data>
+  <data name="CMEMORY_ErrorCorrectType" xml:space="preserve">
+    <value>Коррекция ошибок</value>
+  </data>
+  <data name="CMEMORY_InstalledSize" xml:space="preserve">
+    <value>Ёмкость</value>
+  </data>
+  <data name="CMEMORY_Level" xml:space="preserve">
+    <value>Уровень</value>
+  </data>
+  <data name="CMEMORY_Purpose" xml:space="preserve">
+    <value>Назначение</value>
+  </data>
   <data name="CPU_Name" xml:space="preserve">
-    <value>ПроцессорF</value>
+    <value>Название</value>
   </data>
 </root>

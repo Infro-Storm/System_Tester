@@ -20,7 +20,8 @@ namespace System_Tester
         Int32 speed;
         Int32 configuredClockSpeed;
         static string prefix = "RAM_";
-        public RAMData(ManagementObject instance) : base(instance, prefix)
+        public new static string classWMI = "Win32_PhysicalMemory";
+        public RAMData() : base(prefix)
         {/*
             foreach (PropertyData nameprp in instance.Properties)
             {
