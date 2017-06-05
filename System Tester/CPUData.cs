@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using System.Linq;
 using System.Management;
 using System.Text;
@@ -12,58 +13,29 @@ namespace System_Tester
         static new string prefix = "CPU_";
         public new static string classWMI = "Win32_Processor";
         public new string name;
+        Dictionary<string, ListViewItem.ListViewSubItem> filds = new Dictionary<string, ListViewItem.ListViewSubItem>();
         
         public CPUData() 
         {
             base.prefix = prefix;
         }
-/*
-        public CPUData(ManagementObject instance) : base(instance)
-        {
-            foreach (PropertyData nameprp in instance.Properties)
-            {
-                string propertyName = nameprp.Name;
-                if (instance[propertyName] != null)
-                {
-                    switch (propertyName)
-                    {
-                        case "Name":
-                            modelNameCPU = instance[propertyName].ToString();
-                            break;
-                        case "MaxClockSpeed":
-                            maxClockCPU = Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "DeviceID":
-                            break;
-                        case "NumberOfCores":
-                            coreCount = Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "NumberOfLogicalProcessors":
-                            logicalCoreCount = Convert.ToInt32(instance[propertyName].ToString());
-                            break;
-                        case "ProcessorId":
-                            processorID = instance[propertyName].ToString();
-                            break;
-                        default:
-                            Logger.AddText(nameprp.Name + " " + instance[nameprp.Name].ToString(), Message_level.debug, Message_type.info);
-                            break;
-                    }
 
-                }
-            } 
+        public void SetFilds(string name, ListViewItem.ListViewSubItem sItem )
+        {
+            filds.Add(name, sItem);
         }
-        */
+
         public override List<DeviceForView> GetInfo()
         {
-           name = props[prefix + "DeviceID"];
-             return base.GetInfo();
-        }
-        
-        public List<DeviceForView> GetShortInfo()
-        {
-            List<DeviceForView> result = new List<DeviceForView>();
-           // result.Add()
-            return result;
+            name = props[prefix + "DeviceID"] + " (" + props[prefix + "Name"] + ")";
+            props[prefix + "CurrentClockSpeed"] += " МГц";
+            props[prefix + "CurrentVoltage"] = (Convert.ToDouble(props[prefix + "CurrentVoltage"]) / 10).ToString() + " В";
+            props[prefix + "ExtClock"] += " МГц";
+            props[prefix + "LoadPercentage"] += " %";
+            props[prefix + "MaxClockSpeed"] += " МГц";
+            if (props[prefix + "VirtualizationFirmwareEnabled"].Equals("True")) props[prefix + "VirtualizationFirmwareEnabled"] = "Поддерживается";
+            else props[prefix + "VirtualizationFirmwareEnabled"] = "Не поддерживается";
+            return base.GetInfo();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace System_Tester
     {
         protected Dictionary<string, string> props = new Dictionary<string, string>();
         protected ManagementObject instance;
-        protected static string classWMI;
+        protected static string classWMI ="";
         protected string prefix;
         public string name = "Unnamed_device";
         public Device()
@@ -47,7 +47,7 @@ namespace System_Tester
 
             foreach (KeyValuePair<string, string> entry in props) {
                 string name = Properties.Resources.ResourceManager.GetString(entry.Key);
-                //Logger.AddText("Translated item: \"" + name + '\"');
+                Logger.AddText("Translated item: \"" + entry.Key + '\"' + ": " + entry.Value);
                 if (name==null && Model.showUnknownValue) result.Add(new DeviceForView(entry.Key, entry.Value, ""));
                 if (name!=null )result.Add(new DeviceForView(name, entry.Value, ""));
             }
@@ -69,21 +69,6 @@ namespace System_Tester
         }
     }
 
-    /*
-    class DeviceWithID : Device
-    {
-        protected string deviceName;
-        public DeviceWithID(ManagementObject instance) : base(instance)
-        {
-            if (instance["DeviceID"] != null) deviceName = instance["DeviceID"].ToString();
-        }
-        public override List<DeviceForView> GetInfo(string prefix)
-        {
-            List<DeviceForView> result = new List<DeviceForView>();
-            return result;
-        }
-    }
-    */
     public class DeviceForView
     {
         string name;

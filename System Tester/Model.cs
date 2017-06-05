@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Management;
 using System.Resources;
+using System.Threading;
 
 namespace System_Tester
 {
@@ -125,7 +126,8 @@ namespace System_Tester
         static LogView loggerWindow;
         static MainView mainView;
         public static Int32 thread_count = 0;
-        public static bool showUnknownValue = true;//false;
+        public static bool showUnknownValue = false;// true;
+        public static Int32 networkPort = 9000;
         //Геттеры и сеттеры
         public static bool Debug_mode
         {
@@ -171,6 +173,7 @@ namespace System_Tester
             Application.SetCompatibleTextRenderingDefault(false);
             mainView = new MainView();
             Application.Run(mainView);
+
         }
 
         public static void Debug_state_init()

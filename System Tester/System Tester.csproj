@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Controller.cs" />
     <Compile Include="CatchMemoryData.cs" />
+    <Compile Include="Network.cs" />
     <Compile Include="TemperatureSensorDate.cs" />
     <Compile Include="StorageData.cs" />
     <Compile Include="CPUData.cs" />
@@ -138,6 +139,13 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon1.ico" />
+    <Content Include="Resources\network-notebook_4354.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

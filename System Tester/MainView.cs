@@ -17,6 +17,7 @@ namespace System_Tester
     public partial class MainView : Form
     {
         delegate void setInfoDelegate(List<DeviceForView> newfilds, TabOfProgramm tab, string name);
+        delegate void renewValueDelegate(TabOfProgramm tab, string valueName, string value);
         public static MainView RunWindowEx;
         ResourceManager rm = new ResourceManager("MainView", typeof(MainView).Assembly);
         public static MainView GetRWE() {
@@ -37,6 +38,30 @@ namespace System_Tester
             MessageBox.Show(str);
 
         }
+        public void RenewValue(TabOfProgramm tab, string valueName, string value)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new renewValueDelegate(RenewValue), new object[] { tab, valueName, value });
+                return;
+            }
+            try
+            {
+                // ListView list = SelectTab(tab);
+                // list.Items[valueName].SubItems["first"].Text = value;
+            }
+            catch (Exception e)
+            {
+                Logger.AddText(e.ToString(), Message_level.normal, Message_type.error);
+            }
+        }
+        public void newNeighbor(string ip, string name)
+        {
+            List<DeviceForView> list = new List<DeviceForView>();
+            list.Add(new DeviceForView(name, ip, ""));
+            SetInfo(list, TabOfProgramm.network, "Компьютеры в сети");
+        }
+
         private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
         }
@@ -48,47 +73,64 @@ namespace System_Tester
             refreser.Start();
            // MessageBox.Show(Properties.Resources.ResourceManager.GetString("CPU_NAME"));
         }
+
+        public ListView SelectTab(TabOfProgramm tab) {
+            ListView result;
+            switch (tab)
+            {
+                case TabOfProgramm.general:
+                    result = GeneralListView;
+                    break;
+                case TabOfProgramm.cpu:
+                    result = CPU_ListView;
+                    break;
+                case TabOfProgramm.ram:
+                    result = RAMListView;
+                    break;
+                case TabOfProgramm.network:
+                    result = networkListView;
+                    break;
+                case TabOfProgramm.storage:
+                    result = storageListView;
+                    break;
+                default:
+                    result = GeneralListView;
+                    break;
+            }
+            return result;
+        }
+
         public void SetInfo(List<DeviceForView> newfilds, TabOfProgramm tab, string name)
         {
             if (InvokeRequired)
             {
                 BeginInvoke(new setInfoDelegate(SetInfo), new object[] { newfilds, tab, name });
                 return;
-            }
-
-            ListView listView;
-
-            switch (tab)
+            }            
+            ListView listView = SelectTab(tab);
+            ListViewGroup group;
+            if (listView.Groups[name] == null)
             {
-                case TabOfProgramm.general:
-                    listView = GeneralListView;
-                    break;
-                case TabOfProgramm.cpu:
-                    listView = CPU_ListView;
-                    break;
-                case TabOfProgramm.ram:
-                    listView = RAMListView;
-                    break;
-                case TabOfProgramm.network:
-                    listView = networkListView;
-                    break;
-                case TabOfProgramm.storage:
-                    listView = storageListView;
-                    break;
-                default:
-                    listView = GeneralListView;
-                    break;
+                group = new ListViewGroup();
+                group.Header = name;
+                group.Name = name;
+                listView.Groups.Add(group);
             }
-            ListViewGroup group = new ListViewGroup();
-            group.Header = name;
-            listView.Groups.Add(group);
+            else
+            {
+                group = listView.Groups[name];
+            }
             foreach (DeviceForView filds in newfilds)
             {
                 ListViewItem item = new ListViewItem();
                 item.Text = filds.Name;
-                item.SubItems.Add(filds.Value);
+                ListViewItem.ListViewSubItem sItem = new ListViewItem.ListViewSubItem();
+                sItem.Text = filds.Value;
+                item.SubItems.Add(sItem);
                 item.Group = group;
+                if (tab == TabOfProgramm.network) item.ImageIndex = 0;
                 listView.Items.Add(item);
+
                 listView.Columns[0].Width = -2;
                 listView.Columns[1].Width = -2;
             }
@@ -117,6 +159,11 @@ namespace System_Tester
         }
 
         private void CPU_ListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void networkListView_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

@@ -28,30 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.GeneralAnalysisTab = new System.Windows.Forms.TabPage();
+            this.GeneralListView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CPUAnalysisTab = new System.Windows.Forms.TabPage();
             this.CPU_ListView = new System.Windows.Forms.ListView();
             this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.RAMAnalysisTab = new System.Windows.Forms.TabPage();
-            this.DSAnalysisTab = new System.Windows.Forms.TabPage();
-            this.TCNAnalysisTab = new System.Windows.Forms.TabPage();
-            this.GeneralListView = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.RAMListView = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DSAnalysisTab = new System.Windows.Forms.TabPage();
             this.storageListView = new System.Windows.Forms.ListView();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TCNAnalysisTab = new System.Windows.Forms.TabPage();
             this.networkListView = new System.Windows.Forms.ListView();
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.GeneralAnalysisTab.SuspendLayout();
@@ -123,6 +125,30 @@
             this.GeneralAnalysisTab.UseVisualStyleBackColor = true;
             this.GeneralAnalysisTab.Click += new System.EventHandler(this.GeneralAnalysisTab_Click);
             // 
+            // GeneralListView
+            // 
+            this.GeneralListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.GeneralListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GeneralListView.LargeImageList = this.imageList1;
+            this.GeneralListView.Location = new System.Drawing.Point(3, 3);
+            this.GeneralListView.Name = "GeneralListView";
+            this.GeneralListView.Size = new System.Drawing.Size(362, 291);
+            this.GeneralListView.TabIndex = 1;
+            this.GeneralListView.UseCompatibleStateImageBehavior = false;
+            this.GeneralListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Название";
+            this.columnHeader1.Width = 62;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Значение";
+            this.columnHeader2.Width = 333;
+            // 
             // CPUAnalysisTab
             // 
             this.CPUAnalysisTab.Controls.Add(this.CPU_ListView);
@@ -169,49 +195,6 @@
             this.RAMAnalysisTab.Text = "Анализ ОЗУ";
             this.RAMAnalysisTab.UseVisualStyleBackColor = true;
             // 
-            // DSAnalysisTab
-            // 
-            this.DSAnalysisTab.Controls.Add(this.storageListView);
-            this.DSAnalysisTab.Location = new System.Drawing.Point(4, 22);
-            this.DSAnalysisTab.Name = "DSAnalysisTab";
-            this.DSAnalysisTab.Size = new System.Drawing.Size(368, 297);
-            this.DSAnalysisTab.TabIndex = 4;
-            this.DSAnalysisTab.Text = "Анализ ЗУ";
-            this.DSAnalysisTab.UseVisualStyleBackColor = true;
-            // 
-            // TCNAnalysisTab
-            // 
-            this.TCNAnalysisTab.Controls.Add(this.networkListView);
-            this.TCNAnalysisTab.Location = new System.Drawing.Point(4, 22);
-            this.TCNAnalysisTab.Name = "TCNAnalysisTab";
-            this.TCNAnalysisTab.Size = new System.Drawing.Size(368, 297);
-            this.TCNAnalysisTab.TabIndex = 3;
-            this.TCNAnalysisTab.Text = "Анализ ТВС";
-            this.TCNAnalysisTab.UseVisualStyleBackColor = true;
-            // 
-            // GeneralListView
-            // 
-            this.GeneralListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-            this.GeneralListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GeneralListView.Location = new System.Drawing.Point(3, 3);
-            this.GeneralListView.Name = "GeneralListView";
-            this.GeneralListView.Size = new System.Drawing.Size(362, 291);
-            this.GeneralListView.TabIndex = 1;
-            this.GeneralListView.UseCompatibleStateImageBehavior = false;
-            this.GeneralListView.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Название";
-            this.columnHeader1.Width = 62;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Значение";
-            this.columnHeader2.Width = 333;
-            // 
             // RAMListView
             // 
             this.RAMListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -234,6 +217,16 @@
             // 
             this.columnHeader4.Text = "Значение";
             this.columnHeader4.Width = 333;
+            // 
+            // DSAnalysisTab
+            // 
+            this.DSAnalysisTab.Controls.Add(this.storageListView);
+            this.DSAnalysisTab.Location = new System.Drawing.Point(4, 22);
+            this.DSAnalysisTab.Name = "DSAnalysisTab";
+            this.DSAnalysisTab.Size = new System.Drawing.Size(368, 297);
+            this.DSAnalysisTab.TabIndex = 4;
+            this.DSAnalysisTab.Text = "Анализ ЗУ";
+            this.DSAnalysisTab.UseVisualStyleBackColor = true;
             // 
             // storageListView
             // 
@@ -258,18 +251,32 @@
             this.columnHeader6.Text = "Значение";
             this.columnHeader6.Width = 333;
             // 
+            // TCNAnalysisTab
+            // 
+            this.TCNAnalysisTab.Controls.Add(this.networkListView);
+            this.TCNAnalysisTab.Location = new System.Drawing.Point(4, 22);
+            this.TCNAnalysisTab.Name = "TCNAnalysisTab";
+            this.TCNAnalysisTab.Size = new System.Drawing.Size(368, 297);
+            this.TCNAnalysisTab.TabIndex = 3;
+            this.TCNAnalysisTab.Text = "Анализ ТВС";
+            this.TCNAnalysisTab.UseVisualStyleBackColor = true;
+            // 
             // networkListView
             // 
+            this.networkListView.Alignment = System.Windows.Forms.ListViewAlignment.Default;
             this.networkListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader7,
             this.columnHeader8});
             this.networkListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.networkListView.LargeImageList = this.imageList1;
             this.networkListView.Location = new System.Drawing.Point(0, 0);
             this.networkListView.Name = "networkListView";
             this.networkListView.Size = new System.Drawing.Size(368, 297);
+            this.networkListView.SmallImageList = this.imageList1;
             this.networkListView.TabIndex = 1;
             this.networkListView.UseCompatibleStateImageBehavior = false;
-            this.networkListView.View = System.Windows.Forms.View.Details;
+            this.networkListView.View = System.Windows.Forms.View.Tile;
+            this.networkListView.SelectedIndexChanged += new System.EventHandler(this.networkListView_SelectedIndexChanged);
             // 
             // columnHeader7
             // 
@@ -280,6 +287,12 @@
             // 
             this.columnHeader8.Text = "Значение";
             this.columnHeader8.Width = 333;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "network-notebook_4354.ico");
             // 
             // MainView
             // 
@@ -329,6 +342,7 @@
         private System.Windows.Forms.ListView networkListView;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
 

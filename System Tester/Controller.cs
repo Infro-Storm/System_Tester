@@ -26,10 +26,15 @@ namespace System_Tester
         }
         public static void GetSystemInfo()
         {
+            Thread networkSeacher = new Thread(Network.Receiver);
+            networkSeacher.Start();
             Model.GetCompuerData();
+            int i = 0;
             while (true) {
                 Thread.Sleep(1000);
-                Logger.AddText("Обновление данных!");
+                Model.MainWindow.RenewValue(TabOfProgramm.cpu, "CPU_Name", i.ToString());
+                i++;
+               // Logger.AddText("Обновление данных!");
             }
         }
         public static void StartCpuTest()
@@ -37,6 +42,7 @@ namespace System_Tester
             btest = new List<DeviceForView>();
             test_speed = new Stopwatch();
             
+            btest.Add(new DeviceForView("Результат RAM", Model.ValueСonvert(CPUTest.RAMTest(), "", 1000), ""));
             int cpu_count = Environment.ProcessorCount;
             Logger.AddText("CPUs count: " + cpu_count);
             CPUTest[] test_core = new CPUTest[cpu_count];
@@ -45,7 +51,7 @@ namespace System_Tester
             {
                // Logger.AddText("Thread starting: " + cpu);
                 test_core[cpu] = new CPUTest("Core " + cpu, LOAD);
-                thread_test[cpu] = new Thread(new ThreadStart(test_core[cpu].CPU_Beanch));
+                thread_test[cpu] = new Thread(test_core[cpu].CPU_Beanch);
                 Model.thread_count++;
             }
 

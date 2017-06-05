@@ -132,7 +132,110 @@
   <data name="CMEMORY_Purpose" xml:space="preserve">
     <value>Назначение</value>
   </data>
+  <data name="CPU_CurrentClockSpeed" xml:space="preserve">
+    <value>Действующая частота</value>
+  </data>
+  <data name="CPU_CurrentVoltage" xml:space="preserve">
+    <value>Напряжение</value>
+  </data>
+  <data name="CPU_DataWidth" xml:space="preserve">
+    <value>Разрядность</value>
+  </data>
+  <data name="CPU_Description" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="CPU_ExtClock" xml:space="preserve">
+    <value>Частота шины</value>
+  </data>
+  <data name="CPU_LoadPercentage" xml:space="preserve">
+    <value>Нагрузка</value>
+  </data>
+  <data name="CPU_MaxClockSpeed" xml:space="preserve">
+    <value>Максимальная частота</value>
+  </data>
   <data name="CPU_Name" xml:space="preserve">
     <value>Название</value>
+  </data>
+  <data name="CPU_NumberOfCores" xml:space="preserve">
+    <value>Количество ядер</value>
+  </data>
+  <data name="CPU_NumberOfEnabledCore" xml:space="preserve">
+    <value>Действующие ядра</value>
+  </data>
+  <data name="CPU_NumberOfLogicalProcessors" xml:space="preserve">
+    <value>Логические ядра</value>
+  </data>
+  <data name="CPU_SerialNumber" xml:space="preserve">
+    <value>Серийный номер</value>
+  </data>
+  <data name="CPU_SocketDesignation" xml:space="preserve">
+    <value>Сокет</value>
+  </data>
+  <data name="CPU_ThreadCount" xml:space="preserve">
+    <value>Количество потоков</value>
+  </data>
+  <data name="CPU_VirtualizationFirmwareEnabled" xml:space="preserve">
+    <value>Виртуализация</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="network_notebook_4354" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\network-notebook_4354.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RAM_BankLabel" xml:space="preserve">
+    <value>Банк памяти</value>
+  </data>
+  <data name="RAM_Capacity" xml:space="preserve">
+    <value>Ёмкость</value>
+  </data>
+  <data name="RAM_ConfiguredClockSpeed" xml:space="preserve">
+    <value>Действующая частота</value>
+  </data>
+  <data name="RAM_DataWidth" xml:space="preserve">
+    <value>Разрядность</value>
+  </data>
+  <data name="RAM_DeviceLocator" xml:space="preserve">
+    <value>Слот</value>
+  </data>
+  <data name="RAM_FormFactor" xml:space="preserve">
+    <value>Форм-фактор</value>
+  </data>
+  <data name="RAM_Manufacturer" xml:space="preserve">
+    <value>Производитель</value>
+  </data>
+  <data name="RAM_MemoryType" xml:space="preserve">
+    <value>Тип памяти</value>
+  </data>
+  <data name="RAM_PartNumber" xml:space="preserve">
+    <value>Партия</value>
+  </data>
+  <data name="RAM_SerialNumber" xml:space="preserve">
+    <value>Серийный номер</value>
+  </data>
+  <data name="RAM_Speed" xml:space="preserve">
+    <value>Частота</value>
+  </data>
+  <data name="RAM_Tag" xml:space="preserve">
+    <value>Планка</value>
+  </data>
+  <data name="SMEMORY_FirmwareRevision" xml:space="preserve">
+    <value>Прошивка</value>
+  </data>
+  <data name="SMEMORY_InterfaceType" xml:space="preserve">
+    <value>Интерфейс подключения</value>
+  </data>
+  <data name="SMEMORY_Model" xml:space="preserve">
+    <value>Модель</value>
+  </data>
+  <data name="SMEMORY_Partitions" xml:space="preserve">
+    <value>Разделы</value>
+  </data>
+  <data name="SMEMORY_SerialNumber" xml:space="preserve">
+    <value>Серийный номер</value>
+  </data>
+  <data name="SMEMORY_Size" xml:space="preserve">
+    <value>Ёмкость</value>
+  </data>
+  <data name="TSENSORS_Temperature" xml:space="preserve">
+    <value>Температура</value>
   </data>
 </root>

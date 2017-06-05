@@ -12,7 +12,7 @@ namespace System_Tester
         private string name;
         private long load;
         private double[,] mas;
-        private Random r;
+        private static Random r= new Random();
         Stopwatch sWatch;
         double tmp;
 
@@ -21,14 +21,26 @@ namespace System_Tester
             name = thread_name;
             load = thread_load;
             mas = new double[2, load];
-            r = new Random();
             sWatch = new Stopwatch();
-
+            
             for (int i = 0; i < mas.GetLength(0); i++)
                 for (int j = 0; j < mas.GetLength(1); j++)
                 {
+                    
                     mas[i, j] = r.NextDouble();
+                    
                 }
+
+        }
+
+        public static long RAMTest()
+        {
+            Stopwatch sWatch = new Stopwatch();
+            sWatch.Start();
+            Int32 tmp = 0;
+            for (UInt64 i = 0; i < 4000000000; i++) tmp = r.Next(Int32.MinValue, Int32.MaxValue);
+            sWatch.Stop();
+            return sWatch.ElapsedMilliseconds;
         }
 
         public void CPU_Beanch()

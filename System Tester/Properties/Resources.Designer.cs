@@ -106,11 +106,318 @@ namespace System_Tester.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Действующая частота.
+        /// </summary>
+        internal static string CPU_CurrentClockSpeed {
+            get {
+                return ResourceManager.GetString("CPU_CurrentClockSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Напряжение.
+        /// </summary>
+        internal static string CPU_CurrentVoltage {
+            get {
+                return ResourceManager.GetString("CPU_CurrentVoltage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Разрядность.
+        /// </summary>
+        internal static string CPU_DataWidth {
+            get {
+                return ResourceManager.GetString("CPU_DataWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Примечание.
+        /// </summary>
+        internal static string CPU_Description {
+            get {
+                return ResourceManager.GetString("CPU_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Частота шины.
+        /// </summary>
+        internal static string CPU_ExtClock {
+            get {
+                return ResourceManager.GetString("CPU_ExtClock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Нагрузка.
+        /// </summary>
+        internal static string CPU_LoadPercentage {
+            get {
+                return ResourceManager.GetString("CPU_LoadPercentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Максимальная частота.
+        /// </summary>
+        internal static string CPU_MaxClockSpeed {
+            get {
+                return ResourceManager.GetString("CPU_MaxClockSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Название.
         /// </summary>
         internal static string CPU_Name {
             get {
                 return ResourceManager.GetString("CPU_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Количество ядер.
+        /// </summary>
+        internal static string CPU_NumberOfCores {
+            get {
+                return ResourceManager.GetString("CPU_NumberOfCores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Действующие ядра.
+        /// </summary>
+        internal static string CPU_NumberOfEnabledCore {
+            get {
+                return ResourceManager.GetString("CPU_NumberOfEnabledCore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Логические ядра.
+        /// </summary>
+        internal static string CPU_NumberOfLogicalProcessors {
+            get {
+                return ResourceManager.GetString("CPU_NumberOfLogicalProcessors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Серийный номер.
+        /// </summary>
+        internal static string CPU_SerialNumber {
+            get {
+                return ResourceManager.GetString("CPU_SerialNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сокет.
+        /// </summary>
+        internal static string CPU_SocketDesignation {
+            get {
+                return ResourceManager.GetString("CPU_SocketDesignation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Количество потоков.
+        /// </summary>
+        internal static string CPU_ThreadCount {
+            get {
+                return ResourceManager.GetString("CPU_ThreadCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виртуализация.
+        /// </summary>
+        internal static string CPU_VirtualizationFirmwareEnabled {
+            get {
+                return ResourceManager.GetString("CPU_VirtualizationFirmwareEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
+        /// </summary>
+        internal static System.Drawing.Icon network_notebook_4354 {
+            get {
+                object obj = ResourceManager.GetObject("network_notebook_4354", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Банк памяти.
+        /// </summary>
+        internal static string RAM_BankLabel {
+            get {
+                return ResourceManager.GetString("RAM_BankLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ёмкость.
+        /// </summary>
+        internal static string RAM_Capacity {
+            get {
+                return ResourceManager.GetString("RAM_Capacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Действующая частота.
+        /// </summary>
+        internal static string RAM_ConfiguredClockSpeed {
+            get {
+                return ResourceManager.GetString("RAM_ConfiguredClockSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Разрядность.
+        /// </summary>
+        internal static string RAM_DataWidth {
+            get {
+                return ResourceManager.GetString("RAM_DataWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Слот.
+        /// </summary>
+        internal static string RAM_DeviceLocator {
+            get {
+                return ResourceManager.GetString("RAM_DeviceLocator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Форм-фактор.
+        /// </summary>
+        internal static string RAM_FormFactor {
+            get {
+                return ResourceManager.GetString("RAM_FormFactor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Производитель.
+        /// </summary>
+        internal static string RAM_Manufacturer {
+            get {
+                return ResourceManager.GetString("RAM_Manufacturer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Тип памяти.
+        /// </summary>
+        internal static string RAM_MemoryType {
+            get {
+                return ResourceManager.GetString("RAM_MemoryType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Партия.
+        /// </summary>
+        internal static string RAM_PartNumber {
+            get {
+                return ResourceManager.GetString("RAM_PartNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Серийный номер.
+        /// </summary>
+        internal static string RAM_SerialNumber {
+            get {
+                return ResourceManager.GetString("RAM_SerialNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Частота.
+        /// </summary>
+        internal static string RAM_Speed {
+            get {
+                return ResourceManager.GetString("RAM_Speed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Планка.
+        /// </summary>
+        internal static string RAM_Tag {
+            get {
+                return ResourceManager.GetString("RAM_Tag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Прошивка.
+        /// </summary>
+        internal static string SMEMORY_FirmwareRevision {
+            get {
+                return ResourceManager.GetString("SMEMORY_FirmwareRevision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Интерфейс подключения.
+        /// </summary>
+        internal static string SMEMORY_InterfaceType {
+            get {
+                return ResourceManager.GetString("SMEMORY_InterfaceType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Модель.
+        /// </summary>
+        internal static string SMEMORY_Model {
+            get {
+                return ResourceManager.GetString("SMEMORY_Model", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Разделы.
+        /// </summary>
+        internal static string SMEMORY_Partitions {
+            get {
+                return ResourceManager.GetString("SMEMORY_Partitions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Серийный номер.
+        /// </summary>
+        internal static string SMEMORY_SerialNumber {
+            get {
+                return ResourceManager.GetString("SMEMORY_SerialNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ёмкость.
+        /// </summary>
+        internal static string SMEMORY_Size {
+            get {
+                return ResourceManager.GetString("SMEMORY_Size", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Температура.
+        /// </summary>
+        internal static string TSENSORS_Temperature {
+            get {
+                return ResourceManager.GetString("TSENSORS_Temperature", resourceCulture);
             }
         }
     }
