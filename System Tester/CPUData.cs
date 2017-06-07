@@ -27,12 +27,14 @@ namespace System_Tester
 
         public override List<DeviceForView> GetInfo()
         {
+            string tmp_value;
             name = props[prefix + "DeviceID"] + " (" + props[prefix + "Name"] + ")";
-            props[prefix + "CurrentClockSpeed"] += " МГц";
-            props[prefix + "CurrentVoltage"] = (Convert.ToDouble(props[prefix + "CurrentVoltage"]) / 10).ToString() + " В";
-            props[prefix + "ExtClock"] += " МГц";
-            props[prefix + "LoadPercentage"] += " %";
-            props[prefix + "MaxClockSpeed"] += " МГц";
+
+            if (props.TryGetValue(prefix + "CurrentClockSpeed", out tmp_value)) props[prefix + "CurrentClockSpeed"] += " МГц";
+            if (props.TryGetValue(prefix + "CurrentClockSpeed", out tmp_value)) props[prefix + "CurrentVoltage"] = (Convert.ToDouble(props[prefix + "CurrentVoltage"]) / 10).ToString() + " В";
+            if (props.TryGetValue(prefix + "CurrentClockSpeed", out tmp_value)) props[prefix + "ExtClock"] += " МГц";
+            if (props.TryGetValue(prefix + "CurrentClockSpeed", out tmp_value)) props[prefix + "LoadPercentage"] += " %";
+            if (props.TryGetValue(prefix + "CurrentClockSpeed", out tmp_value)) props[prefix + "MaxClockSpeed"] += " МГц";
             if (props[prefix + "VirtualizationFirmwareEnabled"].Equals("True")) props[prefix + "VirtualizationFirmwareEnabled"] = "Поддерживается";
             else props[prefix + "VirtualizationFirmwareEnabled"] = "Не поддерживается";
             return base.GetInfo();

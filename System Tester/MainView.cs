@@ -167,5 +167,15 @@ namespace System_Tester
         {
 
         }
+
+        private void networkListView_DoubleClick(object sender, EventArgs e)
+        {
+           // MessageBox.Show("Вы выбрали!");
+        }
+
+        private void networkListView_ItemActivate(object sender, EventArgs e)
+        {
+            MessageBox.Show("Вы выбрали!");
+        }
     }
 }

@@ -11,17 +11,30 @@ namespace System_Tester
 {
     class Network
     {
-        private static IPAddress remoteIPAddress = IPAddress.Broadcast;
+        private static IPEndPoint broadcastEndPoint = new IPEndPoint(IPAddress.Broadcast, Model.networkPort);
         public static Dictionary<string, string> neighbors = new Dictionary<string, string>();
 
+        private static void Send(int commandCode, IPEndPoint endPoint)
+        {
+            char[] sendPack = new char[] { (char)commandCode };
+            Send(sendPack, endPoint);
+        }
 
-        private static void Send(char[] datagram)
+        private static void Send(int commandCode, string message, IPEndPoint endPoint)
+        {
+            string sendPack = (char)commandCode + message;
+            Send(sendPack, endPoint);
+        }
+
+        private static void Send(string str, IPEndPoint endPoint)
+        {
+            Send(str.ToCharArray(), endPoint);
+        }
+        private static void Send(char[] datagram, IPEndPoint endPoint)
         {
             // Создаем UdpClient
             UdpClient sender = new UdpClient();
-
-            // Создаем endPoint по информации об удаленном хосте
-            IPEndPoint endPoint = new IPEndPoint(remoteIPAddress, Model.networkPort);
+            endPoint.Port = Model.networkPort;
 
             try
             {
@@ -42,11 +55,16 @@ namespace System_Tester
             }
         }
 
+        public static void SpeedOutgoingTest(Int64 speedTestLoad)
+        {
+            
+        }
+
         private static void NeighborDiscover()
         {
             while (true)
             {               
-                Send(new char[] {(char) 0x01 } );
+                Send(0x01, broadcastEndPoint );
                 Logger.AddText("Discover pack sended.", Message_level.debug, Message_type.debug);
                 Thread.Sleep(5000);
             }
@@ -54,14 +72,14 @@ namespace System_Tester
 
         private static void ProtocolProcessor(string msg, IPEndPoint neighborIP)
         {
+            string ipaddress = neighborIP.Address.ToString();
             switch (msg[0])
             {
                 case (char)0x01:
-                    string sendPack = (char)0x02 + Environment.MachineName;
-                    Send(sendPack.ToCharArray());
+                    Send(0x02, Environment.MachineName,  neighborIP);
+                    Logger.AddText("Discovery pack: " + ipaddress);
                     break;
                 case (char)0x02:
-                    string ipaddress = neighborIP.Address.ToString();
                     string netName = msg.Substring(1);
                     Logger.AddText("Found neighbor! His name is " + netName  + " " + ipaddress);
                     if (!neighbors.ContainsKey(ipaddress))
@@ -69,6 +87,9 @@ namespace System_Tester
                         neighbors.Add(ipaddress, netName);
                         Model.MainWindow.newNeighbor(ipaddress, netName);
                     }
+                    break;
+                case (char)0x03:
+                    Send(0x04, neighborIP);
                     break;
                 default:
                     Logger.AddText("System Tester network protocol error! Recived invalid pack: " + msg, Message_level.normal, Message_type.error);
