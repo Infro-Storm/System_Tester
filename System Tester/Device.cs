@@ -40,6 +40,26 @@ namespace System_Tester
             }
 
         }
+        public virtual void AddPropUnits(string key, string units)
+        {
+            if (props.TryGetValue(prefix + key, out string tmp_value)) props[prefix + key] += " "+units;
+        }
+
+        public virtual void FactorAddPropUnits(string key, string units, double factor)
+        {
+            if (props.TryGetValue(prefix + key, out string tmp_value)) props[prefix + key] = (Convert.ToInt64(tmp_value) * factor).ToString() + " " + units;
+        }
+
+        public virtual void LogicalAddPropUnits(string key)
+        {
+            if (props.TryGetValue(prefix + key, out string tmp_value))
+            {
+                if (props[prefix + key].Equals("True")) props[prefix + key] = "Поддерживается";
+                else props[prefix + key] = "Не поддерживается";
+            }
+        }
+
+
 
         public virtual List<DeviceForView> GetInfo()
         {
