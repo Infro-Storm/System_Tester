@@ -10,29 +10,39 @@ using System.Threading;
 namespace System_Tester
 {
     //enum перечисления:
+    //Здесь всякие удобные типы которые понятны (Исползуются вместо чисел, для обозночение того или иного свойства)
+
+    //Объявляем типы сообщений в логе
+    //Влияет на отображение в журнале событий
     public enum Message_type : byte
     {
-        error,
-        info,
-        test,
-        debug,
-        warning
-    }
-    public enum Message_level : byte
-    {
-        normal,
-        debug,
-        full_log,
-    }
-    public enum TabOfProgramm : byte
-    {
-        general,
-        cpu,
-        ram,
-        storage,
-        network
+        error,  //Ошибка
+        info,   //Информация
+        test,   //Тестовое сообщение
+        debug,  //Отладка
+        warning //Предупреждение
     }
 
+    //Объявляем уровни журналирования
+    public enum Message_level : byte
+    {
+        normal,     //Нормальный лог
+        debug,      //Отладочный лог
+        full_log,   //Показывать все
+    }
+
+    //Объявляем вкладки программы
+    public enum TabOfProgramm : byte
+    {
+        general,    //Общая информация
+        cpu,        //О ЦП
+        ram,        //Об ОЗУ
+        storage,    //О устройствах хранения информации
+        network     //Сеть
+    }
+
+
+    //Объявляем форм факторы оперативной памяти, можно использовать для отображения
     public enum MemoryFormFactor : byte
     {
         Unknown = 0,
@@ -60,6 +70,8 @@ namespace System_Tester
         FPBGA = 22,
         LGA = 23
     }
+
+    //Объявляем типы памяти, можно использовать для отображения
     public enum MemoryType : byte
     {
         Unknown = 0,
@@ -90,6 +102,7 @@ namespace System_Tester
         FBD2 = 25,
     }
 
+    //Типы данных для которых используется данная кэш память
     public enum CacheType : byte
     {
         Другое = 1,
@@ -99,6 +112,7 @@ namespace System_Tester
         Унифицированный = 5
     }
 
+    //Типы коррекции ошибок кэш-памяти
     public enum ErrorCorrection : byte
     {
         Резервирование = 0,
@@ -109,6 +123,8 @@ namespace System_Tester
         Однобитовая = 5,
         Многобитовая = 6
     }
+
+    //Уровни кэша
     public enum CacheLevel : byte
     {
         Другой = 1,
@@ -119,24 +135,26 @@ namespace System_Tester
         Неприменимо = 6,
     }
 
+    //Класс модели
     static class Model
     {
         //Глобальные переменные
-        static bool debug_mode = false;
-        static LogView loggerWindow;
-        static MainView mainView;
-        public static Int32 thread_count = 0;
-        public static bool showUnknownValue = false;// true;
-        public static Int32 networkPort = 9000;
+        static bool debug_mode = false;             //Переменная отвечающая за состояние окна журналирования
+        static LogView loggerWindow;                //Экземпляр окна журнала
+        static MainView mainView;                   //Экземпляр главного окна
+        public static Int32 thread_count = 0;       //Количество потоков процессора (Используется для расчета и запуска тестирования CPU)
+        public static bool showUnknownValue = false;//Если False то программа скрывает неизвестные значения которые вернул WMI. Используется для отладки.
+        public static Int32 networkPort = 9000;     //UDP порт использующийся для сетевого обмена
         //Геттеры и сеттеры
-        public static bool Debug_mode
+        public static bool Debug_mode               //Возвращает состояние окна журналирования (Переменная debug_mode)
         {
             get
             {
                 return debug_mode;
             }
         }
-        public static LogView LoggerWindow
+
+        public static LogView LoggerWindow          //Возвращает экземпляр окна журналирования
         {
             get
             {
@@ -144,13 +162,14 @@ namespace System_Tester
             }
         }
 
-        public static MainView MainWindow
+        public static MainView MainWindow           //Возвращает экземпляр главного окна
         {
             get
             {
                 return mainView;
             }
         }
+        //Функция преобразования по системе СИ (Кило, Мега, Гига, Тера)
         public static string ValueСonvert(Int64 value, string units, Int32 factor)
         {
 
@@ -176,6 +195,7 @@ namespace System_Tester
 
         }
 
+        //Функция инициализации окна журнала
         public static void Debug_state_init()
         {
             loggerWindow = new LogView();
@@ -184,6 +204,7 @@ namespace System_Tester
             Logger.AddText("Вход в режим отладки", Message_level.normal, Message_type.info);
         }
 
+        //Функция отключения окна журнала
         public static void Debug_state_destroy()
         {
             loggerWindow.Close();
@@ -192,35 +213,29 @@ namespace System_Tester
             Logger.AddText("Выход из режима отладки", Message_level.normal, Message_type.info);
         }
 
+        //Функция получения WMI информации об узлах компьютера
         public static void GetCompuerData()
         {
-            foreach (CPUData cpu in Device.GetDeviceData<CPUData>(CPUData.classWMI))
-            {
-               // mainView.SetInfo(cpu.GetShortInfo(), TabOfProgramm.general);
-                mainView.SetInfo(cpu.GetInfo(), TabOfProgramm.cpu, cpu.name);
-            }
-
+            //Вызываем универсальный метод у родительского класса DEVICE с типом CPUDate и дополнительно берем и докидываем статическое поле 
+            //С названием класса WMI из которого можно почерпнуть информации об устройствах данного типа установленных в данной машине.
+            foreach (CPUData cpu in Device.GetDeviceData<CPUData>(CPUData.classWMI))//В ответ данная функция возвращает массив устройств заданного типа
+                mainView.SetInfo(cpu.GetInfo(), TabOfProgramm.cpu, cpu.name);//У каждого устройства вызывается метод GetInfo, реализация которого в основном
+                                                                             //Лежит в методе родительского класса. GetInfo возвращает лист специальных классов
+                                                                             //DeviceForView. Этот лист метод SetInfo обрабатывает и выводит в заданные ListView на главном окне 
+           //Реализация выгрузки инфы по другим типам устройств иденитчна.
             foreach (RAMData ram in Device.GetDeviceData<RAMData>(RAMData.classWMI))
-            {
-               // mainView.SetInfo(ram.GetShortInfo(), TabOfProgramm.general);
                 mainView.SetInfo(ram.GetInfo(), TabOfProgramm.ram, ram.name);
-            }
+            
 
             foreach (StorageData storage in Device.GetDeviceData<StorageData>(StorageData.classWMI))
-            {
-                //mainView.SetInfo(storage.GetShortInfo(), TabOfProgramm.general);
                 mainView.SetInfo(storage.GetInfo(), TabOfProgramm.storage, storage.name);
-            }
+            
             foreach (CatchMemoryData catchMemory in Device.GetDeviceData<CatchMemoryData>(CatchMemoryData.classWMI))
-            { 
-               //mainView.SetInfo(catchMemory.GetShortInfo(), TabOfProgramm.general);
                mainView.SetInfo(catchMemory.GetInfo(), TabOfProgramm.cpu, catchMemory.name); 
-            }
+            
             foreach (TemperatureSensorDate TempSensor in Device.GetDeviceData<TemperatureSensorDate>(TemperatureSensorDate.classWMI))
-            {
-               // mainView.SetInfo(catchMemory.GetShortInfo(), TabOfProgramm.general);
                 mainView.SetInfo(TempSensor.GetInfo(), TabOfProgramm.general, TempSensor.name);
-            }
+            
         }
     }
 }
