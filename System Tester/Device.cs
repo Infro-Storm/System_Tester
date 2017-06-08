@@ -50,6 +50,11 @@ namespace System_Tester
             if (props.TryGetValue(prefix + key, out string tmp_value)) props[prefix + key] = (Convert.ToInt64(tmp_value) * factor).ToString() + " " + units;
         }
 
+        public virtual void ShiftAddPropUnits(string key, string units, double shift)
+        {
+            if (props.TryGetValue(prefix + key, out string tmp_value)) props[prefix + key] = (Convert.ToInt64(tmp_value) + shift).ToString() + " " + units;
+        }
+
         public virtual void LogicalAddPropUnits(string key)
         {
             if (props.TryGetValue(prefix + key, out string tmp_value))

@@ -39,10 +39,13 @@ namespace System_Tester
         }
         public static void StartCpuTest()
         {
+            Network.StartSpeedTest();
             btest = new List<DeviceForView>();
             test_speed = new Stopwatch();
-            
-            btest.Add(new DeviceForView("Результат RAM", Model.ValueСonvert(CPUTest.RAMTest(), "", 1000), ""));
+            Int64 ram_load = 40000;
+            btest.Add(new DeviceForView("Результат RAM", Model.ValueСonvert(ram_load / CPUTest.RAMTest(ram_load) * 1000, "", 1000), ""));
+            Int64 storage_load = 400;
+            btest.Add(new DeviceForView("Результат системного диска", Model.ValueСonvert(storage_load * 1024 / CPUTest.StorageTest(storage_load) * 1000, "", 1000), ""));
             int cpu_count = Environment.ProcessorCount;
             Logger.AddText("CPUs count: " + cpu_count);
             CPUTest[] test_core = new CPUTest[cpu_count];
@@ -68,7 +71,6 @@ namespace System_Tester
         public static void Thread_Finish()
         {
             btest.Add(new DeviceForView("Результат CPU", Model.ValueСonvert( LOAD * Environment.ProcessorCount / test_speed.ElapsedMilliseconds * 1000, "", 1000),""));
-            //Logger.AddText("Test time:" + Model.ValueСonvert(LOAD * Environment.ProcessorCount / test_speed.ElapsedMilliseconds * 1000, "", 1000));
             Model.MainWindow.SetInfo(btest, TabOfProgramm.general, "Результат тестирования");
         }
     }

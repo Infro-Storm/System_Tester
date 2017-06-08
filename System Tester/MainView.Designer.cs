@@ -276,9 +276,9 @@
             this.networkListView.TabIndex = 1;
             this.networkListView.UseCompatibleStateImageBehavior = false;
             this.networkListView.View = System.Windows.Forms.View.Tile;
-            this.networkListView.ItemActivate += new System.EventHandler(this.networkListView_ItemActivate);
-            this.networkListView.SelectedIndexChanged += new System.EventHandler(this.networkListView_SelectedIndexChanged);
-            this.networkListView.DoubleClick += new System.EventHandler(this.networkListView_DoubleClick);
+            this.networkListView.ItemActivate += new System.EventHandler(this.NetworkListView_ItemActivate);
+            this.networkListView.SelectedIndexChanged += new System.EventHandler(this.NetworkListView_SelectedIndexChanged);
+            this.networkListView.DoubleClick += new System.EventHandler(this.NetworkListView_DoubleClick);
             // 
             // columnHeader7
             // 

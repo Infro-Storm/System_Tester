@@ -55,7 +55,7 @@ namespace System_Tester
                 Logger.AddText(e.ToString(), Message_level.normal, Message_type.error);
             }
         }
-        public void newNeighbor(string ip, string name)
+        public void NewNeighbor(string ip, string name)
         {
             List<DeviceForView> list = new List<DeviceForView>();
             list.Add(new DeviceForView(name, ip, ""));
@@ -64,6 +64,27 @@ namespace System_Tester
 
         private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
+        }
+
+        public void ShowMessage(string title, string message, Message_type type )
+        {
+            MessageBoxIcon msgIco;
+            switch (type)
+            {
+                case Message_type.error:
+                    msgIco = MessageBoxIcon.Error;
+                        break;
+                case Message_type.info:
+                    msgIco = MessageBoxIcon.Asterisk;
+                    break;
+                case Message_type.warning:
+                    msgIco = MessageBoxIcon.Warning;
+                    break;
+                default:
+                    msgIco = MessageBoxIcon.None;
+                    break;
+            }
+            MessageBox.Show(message, title , MessageBoxButtons.OK,  msgIco);
         }
 
         private void MainView_Load(object sender, EventArgs e)
@@ -163,19 +184,21 @@ namespace System_Tester
 
         }
 
-        private void networkListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void NetworkListView_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void networkListView_DoubleClick(object sender, EventArgs e)
+        private void NetworkListView_DoubleClick(object sender, EventArgs e)
         {
            // MessageBox.Show("Вы выбрали!");
         }
 
-        private void networkListView_ItemActivate(object sender, EventArgs e)
+        private void NetworkListView_ItemActivate(object sender, EventArgs e)
         {
-            MessageBox.Show("Вы выбрали!");
+            string ipaddr = networkListView.SelectedItems[0].SubItems[1].Text;
+            Network.SetNeighbor(ipaddr);
+            ShowMessage("Выбран сосед для теста скорости с IP:" + ipaddr);
         }
     }
 }

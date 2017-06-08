@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,13 +34,32 @@ namespace System_Tester
 
         }
 
-        public static long RAMTest()
+
+
+        public static Int64 RAMTest(Int64 load)
         {
+            string filename = Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "test.xml");
             Stopwatch sWatch = new Stopwatch();
             sWatch.Start();
             Int32 tmp = 0;
-            for (UInt64 i = 0; i < 4000000000; i++) tmp = r.Next(Int32.MinValue, Int32.MaxValue);
+            for (Int64 i = 0; i < load; i++) tmp = r.Next(Int32.MinValue, Int32.MaxValue);
             sWatch.Stop();
+            return sWatch.ElapsedMilliseconds;
+        }
+
+
+        public static Int64 StorageTest(Int64 load) {
+            string filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "test.dat");
+            Stopwatch sWatch = new Stopwatch();
+            sWatch.Start();
+            byte[] tmp = new byte[1024];
+            r.NextBytes(tmp);
+            string result = System.Text.Encoding.UTF8.GetString(tmp);
+            for (Int64 i = 0; i < load; i++) {
+                File.AppendAllText(filename, result);
+            }
+            sWatch.Stop();
+            File.Delete(filename);
             return sWatch.ElapsedMilliseconds;
         }
 

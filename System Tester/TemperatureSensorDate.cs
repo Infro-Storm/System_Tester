@@ -15,5 +15,12 @@ namespace System_Tester
         {
 
         }
+                public override List<DeviceForView> GetInfo()
+        {
+            name = "Сенсоры температуры:";// props[prefix + ""] + " (" + props[prefix + "Name"] + ")";
+            ShiftAddPropUnits("Temperature", "C°", -273.15);
+          
+            return base.GetInfo();
+        }
     }
 }
